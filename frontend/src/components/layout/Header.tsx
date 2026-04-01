@@ -1,0 +1,146 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { Menu, ChevronDown, Phone } from 'lucide-react';
+import { useTranslation } from '@/hooks/useTranslation';
+import LanguageSwitcher from './LanguageSwitcher';
+import MobileMenu from './MobileMenu';
+import type { Locale, Category } from '@/types';
+
+interface HeaderProps {
+  locale: Locale;
+  categories?: Category[];
+}
+
+export default function Header({ locale, categories = [] }: HeaderProps) {
+  const { t } = useTranslation(locale);
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
+
+  useEffect(() => {
+    function onScroll() {
+      setScrolled(window.scrollY > 10);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const navItems = [
+    { label: t.nav.home, href: `/${locale}` },
+    { label: t.nav.products, href: `/${locale}/products` },
+    { label: t.nav.gallery, href: `/${locale}/gallery` },
+    { label: t.nav.blog, href: `/${locale}/blog` },
+    { label: t.nav.contact, href: `/${locale}/contact` },
+  ];
+
+  return (
+    <>
+      <header
+        className={`sticky top-0 z-40 bg-white transition-shadow duration-300 ${
+          scrolled ? 'shadow-md' : 'shadow-sm'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link
+              href={`/${locale}`}
+              className="text-2xl font-black tracking-tight flex-shrink-0"
+            >
+              4<span className="text-orange-500">WD</span>.az
+            </Link>
+
+            {/* Desktop Nav */}
+            <nav className="hidden lg:flex items-center gap-1">
+              {navItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-orange-500 hover:bg-orange-50 transition-colors"
+                >
+                  {item.label}
+                </Link>
+              ))}
+
+              {/* Categories dropdown */}
+              {categories.length > 0 && (
+                <div
+                  className="relative"
+                  onMouseEnter={() => setCategoriesOpen(true)}
+                  onMouseLeave={() => setCategoriesOpen(false)}
+                >
+                  <button className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-orange-500 hover:bg-orange-50 transition-colors">
+                    {t.nav.categories}
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform duration-200 ${
+                        categoriesOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+
+                  {categoriesOpen && (
+                    <div className="absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-50">
+                      <Link
+                        href={`/${locale}/products`}
+                        className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors font-medium"
+                      >
+                        {t.nav.allProducts}
+                      </Link>
+                      <div className="my-1 border-t border-gray-100" />
+                      {categories.map((cat) => (
+                        <Link
+                          key={cat.id}
+                          href={`/${locale}/categories/${cat.slug}`}
+                          className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                        >
+                          {locale === 'az' ? cat.name_az || cat.name : cat.name_en || cat.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </nav>
+
+            {/* Right side */}
+            <div className="flex items-center gap-3">
+              {/* Phone */}
+              <a
+                href="tel:+994501234567"
+                className="hidden md:flex items-center gap-1.5 text-sm font-semibold text-gray-700 hover:text-orange-500 transition-colors"
+              >
+                <Phone className="w-4 h-4" />
+                <span>+994 50 123 45 67</span>
+              </a>
+
+              {/* Language switcher (desktop) */}
+              <div className="hidden lg:block">
+                <LanguageSwitcher locale={locale} />
+              </div>
+
+              {/* Hamburger (mobile) */}
+              <button
+                className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+                onClick={() => setMobileOpen(true)}
+                aria-label="Open menu"
+              >
+                <Menu className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <MobileMenu
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        navItems={navItems}
+        categories={categories}
+        t={t}
+        locale={locale}
+      />
+    </>
+  );
+}

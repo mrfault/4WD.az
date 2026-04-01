@@ -1,0 +1,29 @@
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node
+node_modules/
+
+# Laravel
+backend/vendor/
+backend/.env
+backend/storage/app/public/
+backend/storage/framework/
+backend/storage/logs/
+backend/bootstrap/cache/
+backend/public/storage
+backend/public/hot
+backend/public/js/filament/
+
+# Next.js
+frontend/.next/
+frontend/out/
+frontend/.env.local
+
+# Misc
+*.log
