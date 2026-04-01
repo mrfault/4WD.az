@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, ChevronDown, Phone } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 import LanguageSwitcher from './LanguageSwitcher';
@@ -47,9 +48,16 @@ export default function Header({ locale, categories = [] }: HeaderProps) {
             {/* Logo */}
             <Link
               href={`/${locale}`}
-              className="text-2xl font-black tracking-tight flex-shrink-0"
+              className="flex-shrink-0"
             >
-              4<span className="text-orange-500">WD</span>.az
+              <Image
+                src="/logo.png"
+                alt="4WD.az"
+                width={268}
+                height={180}
+                className="h-[138px] w-auto"
+                priority
+              />
             </Link>
 
             {/* Desktop Nav */}

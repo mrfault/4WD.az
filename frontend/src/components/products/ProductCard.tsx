@@ -29,9 +29,11 @@ export default function ProductCard({ product, t, locale }: ProductCardProps) {
   const imageUrl = getImageUrl(product.primary_image);
 
   // Up to 2 compatible vehicle brands
-  const compatBrands = product.compatible_vehicles
-    ?.slice(0, 2)
-    .map((cv) => cv.brand.name)
+  const compat = (product as any).compatibilities ?? (product as any).compatible_vehicles ?? [];
+  const compatBrands = compat
+    .slice(0, 2)
+    .map((cv: any) => cv.brand?.name ?? cv)
+    .filter(Boolean)
     .join(', ');
 
   return (
@@ -62,8 +64,8 @@ export default function ProductCard({ product, t, locale }: ProductCardProps) {
                   {t.product.hotSale}
                 </span>
               )}
-              {product.discount_percent && product.discount_percent > 0 && (
-                <DiscountBadge percent={product.discount_percent} t={t} />
+              {(product as any).discount_percentage > 0 && (
+                <DiscountBadge percent={(product as any).discount_percentage} t={t} />
               )}
             </div>
           </div>

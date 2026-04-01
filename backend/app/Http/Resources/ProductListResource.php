@@ -16,7 +16,8 @@ class ProductListResource extends JsonResource
             : 0;
 
         $primaryImage = $this->whenLoaded('images', function () {
-            return $this->images->first()?->image_path;
+            $path = $this->images->sortBy('sort_order')->first()?->image_path;
+            return $path ? asset('storage/' . $path) : null;
         });
 
         $compatibilitySummary = $this->whenLoaded('compatibilities', function () {
@@ -43,6 +44,7 @@ class ProductListResource extends JsonResource
             'is_hot_sale' => $this->is_hot_sale,
             'is_featured' => $this->is_featured,
             'image' => $primaryImage,
+            'primary_image' => $primaryImage,
             'category' => new CategoryResource($this->whenLoaded('category')),
             'compatibilities' => $compatibilitySummary,
         ];

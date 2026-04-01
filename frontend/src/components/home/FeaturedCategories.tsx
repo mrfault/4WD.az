@@ -1,10 +1,34 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowRight, Tag } from 'lucide-react';
+import {
+  ArrowRight,
+  Tag,
+  Cog,
+  Wrench,
+  Disc3,
+  Car,
+  Zap,
+  ShieldCheck,
+  Cable,
+  Fuel,
+  Settings2,
+  Hammer,
+} from 'lucide-react';
 import type { Locale, Category } from '@/types';
 import type { Translations } from '@/i18n/az';
-import { getImageUrl } from '@/lib/utils';
 import SectionHeader from '@/components/shared/SectionHeader';
+
+const categoryIcons: Record<string, React.ElementType> = {
+  suspension: Cog,
+  'lift-kits': Wrench,
+  'wheels-tires': Disc3,
+  'roof-racks': Car,
+  lighting: Zap,
+  bumpers: ShieldCheck,
+  winches: Cable,
+  snorkels: Fuel,
+  interior: Settings2,
+  'recovery-gear': Hammer,
+};
 
 interface FeaturedCategoriesProps {
   t: Translations;
@@ -17,7 +41,7 @@ export default function FeaturedCategories({
   locale,
   categories,
 }: FeaturedCategoriesProps) {
-  if (categories.length === 0) return null;
+  if (!categories || categories.length === 0) return null;
 
   return (
     <section className="py-16 bg-white">
@@ -38,27 +62,16 @@ export default function FeaturedCategories({
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {categories.slice(0, 10).map((cat) => {
-            const imageUrl = getImageUrl(cat.image);
             const name = locale === 'az' ? cat.name_az || cat.name : cat.name_en || cat.name;
+            const IconComponent = categoryIcons[cat.slug] || Tag;
             return (
               <Link
                 key={cat.id}
                 href={`/${locale}/categories/${cat.slug}`}
                 className="group flex flex-col items-center gap-3 p-5 rounded-2xl border border-gray-100 hover:border-orange-200 hover:bg-orange-50 transition-all duration-200 text-center"
               >
-                {/* Icon/image */}
-                <div className="w-14 h-14 rounded-xl bg-orange-100 flex items-center justify-center overflow-hidden flex-shrink-0 group-hover:bg-orange-200 transition-colors">
-                  {imageUrl ? (
-                    <Image
-                      src={imageUrl}
-                      alt={name}
-                      width={56}
-                      height={56}
-                      className="object-cover w-full h-full"
-                    />
-                  ) : (
-                    <Tag className="w-6 h-6 text-orange-500" />
-                  )}
+                <div className="w-14 h-14 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-200 transition-colors">
+                  <IconComponent className="w-7 h-7 text-orange-500" />
                 </div>
                 <span className="text-sm font-semibold text-gray-800 group-hover:text-orange-600 transition-colors leading-tight">
                   {name}

@@ -2,23 +2,27 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
-import type { ProductImage } from '@/types';
-import { getImageUrl } from '@/lib/utils';
+import { ChevronLeft, ChevronRight, ZoomIn, X } from 'lucide-react';
 import type { Translations } from '@/i18n/az';
 import { AnimatePresence, motion } from 'framer-motion';
 
+interface GalleryImage {
+  id: number;
+  url: string;
+  alt_text?: string | null;
+}
+
 interface ProductGalleryProps {
-  images: ProductImage[];
+  images: GalleryImage[];
   title: string;
   t: Translations;
 }
 
-export default function ProductGallery({ images, title, t }: ProductGalleryProps) {
+export default function ProductGallery({ images = [], title, t }: ProductGalleryProps) {
   const [selected, setSelected] = useState(0);
   const [lightbox, setLightbox] = useState(false);
 
-  if (images.length === 0) {
+  if (!images || images.length === 0) {
     return (
       <div className="aspect-square bg-gray-100 rounded-2xl flex items-center justify-center">
         <span className="text-gray-300 text-4xl font-black">4WD</span>
@@ -27,7 +31,7 @@ export default function ProductGallery({ images, title, t }: ProductGalleryProps
   }
 
   const current = images[selected];
-  const currentUrl = getImageUrl(current.image);
+  const currentUrl = current?.url || null;
 
   function prev() {
     setSelected((s) => (s - 1 + images.length) % images.length);
@@ -61,7 +65,6 @@ export default function ProductGallery({ images, title, t }: ProductGalleryProps
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/10 transition-opacity">
           <ZoomIn className="w-8 h-8 text-white drop-shadow" />
         </div>
-        {/* Prev/next arrows */}
         {images.length > 1 && (
           <>
             <button
@@ -85,34 +88,31 @@ export default function ProductGallery({ images, title, t }: ProductGalleryProps
       {/* Thumbnails */}
       {images.length > 1 && (
         <div className="flex gap-2 overflow-x-auto pb-1">
-          {images.map((img, index) => {
-            const url = getImageUrl(img.image);
-            return (
-              <button
-                key={img.id}
-                onClick={() => setSelected(index)}
-                className={`relative w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
-                  selected === index
-                    ? 'border-orange-500 shadow-md'
-                    : 'border-transparent hover:border-gray-300'
-                }`}
-              >
-                {url ? (
-                  <Image
-                    src={url}
-                    alt={img.alt_text ?? `${title} ${index + 1}`}
-                    fill
-                    className="object-cover"
-                    sizes="64px"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gray-100 flex items-center justify-center">
-                    <span className="text-gray-300 text-xs">4WD</span>
-                  </div>
-                )}
-              </button>
-            );
-          })}
+          {images.map((img, index) => (
+            <button
+              key={img.id}
+              onClick={() => setSelected(index)}
+              className={`relative w-16 h-16 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
+                selected === index
+                  ? 'border-orange-500 shadow-md'
+                  : 'border-transparent hover:border-gray-300'
+              }`}
+            >
+              {img.url ? (
+                <Image
+                  src={img.url}
+                  alt={img.alt_text ?? `${title} ${index + 1}`}
+                  fill
+                  className="object-cover"
+                  sizes="64px"
+                />
+              ) : (
+                <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                  <span className="text-gray-300 text-xs">4WD</span>
+                </div>
+              )}
+            </button>
+          ))}
         </div>
       )}
 
@@ -147,7 +147,7 @@ export default function ProductGallery({ images, title, t }: ProductGalleryProps
                 className="absolute top-2 right-2 bg-black/50 hover:bg-black/70 text-white rounded-full p-1.5 transition-colors"
                 aria-label={t.common.close}
               >
-                <ChevronLeft className="w-5 h-5 rotate-180" />
+                <X className="w-5 h-5" />
               </button>
             </motion.div>
           </motion.div>

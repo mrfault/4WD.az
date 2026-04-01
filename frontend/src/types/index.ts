@@ -65,10 +65,12 @@ export type StockStatus = 'in_stock' | 'by_order' | 'out_of_stock';
 
 export interface ProductImage {
   id: number;
-  image: string;
+  url: string;
+  image?: string;
   alt_text: string | null;
-  order: number;
-  is_primary: boolean;
+  sort_order?: number;
+  order?: number;
+  is_primary?: boolean;
 }
 
 export interface ProductSpecification {

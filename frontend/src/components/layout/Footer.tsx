@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import type { Locale, Category, Settings } from '@/types';
 import type { Translations } from '@/i18n/az';
@@ -53,8 +54,14 @@ export default function Footer({ locale, t, categories = [], settings }: FooterP
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Column 1 - About */}
           <div>
-            <div className="text-2xl font-black mb-4">
-              4<span className="text-orange-500">WD</span>.az
+            <div className="mb-4">
+              <Image
+                src="/logo-white.png"
+                alt="4WD.az"
+                width={177}
+                height={120}
+                className="h-24 w-auto"
+              />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">{t.footer.aboutText}</p>
             {/* Social */}

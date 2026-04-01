@@ -19,7 +19,7 @@ class CategoryResource extends JsonResource
             'name_en' => $this->name_en,
             'description' => $this->{'description_' . $locale} ?? $this->description_az,
             'icon' => $this->icon,
-            'image' => $this->image,
+            'image' => $this->image ? asset('storage/' . $this->image) : null,
             'parent_id' => $this->parent_id,
             'sort_order' => $this->sort_order,
             'products_count' => $this->whenCounted('products'),

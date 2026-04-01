@@ -37,9 +37,9 @@ class ProductResource extends JsonResource
             'is_featured' => $this->is_featured,
             'category' => new CategoryResource($this->whenLoaded('category')),
             'images' => $this->whenLoaded('images', function () {
-                return $this->images->map(fn ($image) => [
+                return $this->images->sortBy('sort_order')->values()->map(fn ($image) => [
                     'id' => $image->id,
-                    'image_path' => $image->image_path,
+                    'url' => asset('storage/' . $image->image_path),
                     'alt_text' => $image->alt_text,
                     'sort_order' => $image->sort_order,
                 ]);

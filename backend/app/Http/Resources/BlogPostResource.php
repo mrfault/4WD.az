@@ -19,7 +19,7 @@ class BlogPostResource extends JsonResource
             'title_en' => $this->title_en,
             'excerpt' => $this->{'excerpt_' . $locale} ?? $this->excerpt_az,
             'content' => $this->{'content_' . $locale} ?? $this->content_az,
-            'featured_image' => $this->featured_image,
+            'featured_image' => $this->featured_image ? asset('storage/' . $this->featured_image) : null,
             'category_tag' => $this->category_tag,
             'published_at' => $this->published_at?->toISOString(),
             'meta_title' => $this->{'meta_title_' . $locale} ?? $this->meta_title_az,
