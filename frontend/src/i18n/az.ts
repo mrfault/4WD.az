@@ -111,7 +111,7 @@ const az = {
     hotSaleSubtitle: 'Xüsusi endirimlə əldə edin',
     discounted: 'Endirimlilər',
     discountedSubtitle: 'Xüsusi endirimli məhsullar',
-    whyChooseUs: 'Niyə Bizi Seçin?',
+    whyChooseUs: 'Niyə Hər Kəs Bizi Seçir?',
     whyChooseUsSubtitle: 'Müştərilərimizə ən yaxşı xidməti təqdim edirik',
     galleryPreview: 'Nümunə İşlər',
     galleryPreviewSubtitle: 'Müştərilərimizin avtomobilləri',

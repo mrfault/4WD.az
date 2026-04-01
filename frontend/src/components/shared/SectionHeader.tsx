@@ -13,7 +13,7 @@ export default function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div
-      className={`flex items-end justify-between mb-8 gap-4 ${centered ? 'flex-col items-center text-center' : ''}`}
+      className={`mb-8 gap-4 ${centered ? 'text-center' : 'flex items-end justify-between'}`}
     >
       <div>
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">{title}</h2>

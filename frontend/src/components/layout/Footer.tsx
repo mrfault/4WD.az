@@ -60,7 +60,7 @@ export default function Footer({ locale, t, categories = [], settings }: FooterP
                 alt="4WD.az"
                 width={177}
                 height={120}
-                className="h-24 w-auto"
+                className="h-48 w-auto"
               />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">{t.footer.aboutText}</p>

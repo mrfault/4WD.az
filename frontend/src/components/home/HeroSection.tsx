@@ -7,8 +7,13 @@ import { ArrowRight, PhoneCall } from 'lucide-react';
 import type { Locale } from '@/types';
 import type { Translations } from '@/i18n/az';
 
-const TOTAL_FRAMES = 86;
-const FPS = 15;
+const VIDEOS = [
+  { folder: 'v0', frames: 43 },
+  { folder: 'v1', frames: 251 },
+  { folder: 'v2', frames: 221 },
+  { folder: 'v3', frames: 164 },
+];
+const FPS = 12;
 const FRAME_INTERVAL = 1000 / FPS;
 
 interface HeroSectionProps {
@@ -20,6 +25,7 @@ function useVideoFrames() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const framesRef = useRef<HTMLImageElement[]>([]);
   const frameIndexRef = useRef(0);
+  const totalFramesRef = useRef(0);
   const rafRef = useRef<number>(0);
   const lastTimeRef = useRef(0);
   const [loaded, setLoaded] = useState(false);
@@ -28,7 +34,7 @@ function useVideoFrames() {
     if (!lastTimeRef.current) lastTimeRef.current = timestamp;
     const delta = timestamp - lastTimeRef.current;
 
-    if (delta >= FRAME_INTERVAL) {
+    if (delta >= FRAME_INTERVAL && totalFramesRef.current > 0) {
       lastTimeRef.current = timestamp - (delta % FRAME_INTERVAL);
       const canvas = canvasRef.current;
       const ctx = canvas?.getContext('2d');
@@ -40,23 +46,26 @@ function useVideoFrames() {
         ctx.drawImage(frame, 0, 0);
       }
 
-      frameIndexRef.current = (frameIndexRef.current + 1) % TOTAL_FRAMES;
+      frameIndexRef.current = (frameIndexRef.current + 1) % totalFramesRef.current;
     }
 
     rafRef.current = requestAnimationFrame(animate);
   }, []);
 
   useEffect(() => {
+    const video = VIDEOS[Math.floor(Math.random() * VIDEOS.length)];
+    totalFramesRef.current = video.frames;
+
     let loadedCount = 0;
     const images: HTMLImageElement[] = [];
 
-    for (let i = 1; i <= TOTAL_FRAMES; i++) {
+    for (let i = 1; i <= video.frames; i++) {
       const img = new Image();
       const num = String(i).padStart(3, '0');
-      img.src = `/hero-frames/frame-${num}.jpg`;
+      img.src = `/hero-frames/${video.folder}/frame-${num}.jpg`;
       img.onload = () => {
         loadedCount++;
-        if (loadedCount >= Math.min(10, TOTAL_FRAMES)) {
+        if (loadedCount >= Math.min(10, video.frames)) {
           setLoaded(true);
         }
       };
@@ -65,7 +74,6 @@ function useVideoFrames() {
 
     framesRef.current = images;
 
-    // Start animation after first frames load
     const startTimeout = setTimeout(() => {
       rafRef.current = requestAnimationFrame(animate);
     }, 300);
@@ -94,8 +102,8 @@ export default function HeroSection({ t, locale }: HeroSectionProps) {
       </div>
 
       {/* Dark overlay for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10" />
 
       {/* Bottom angled shape */}
       <div
