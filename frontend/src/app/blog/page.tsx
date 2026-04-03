@@ -67,13 +67,13 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
                 >
                   {/* Image */}
                   <Link href={`/blog/${post.slug}`} className="block">
-                    <div className="relative h-52 bg-gray-100 overflow-hidden">
+                    <div className="relative aspect-[16/9] bg-gray-100 overflow-hidden">
                       {imageUrl ? (
                         <Image
                           src={imageUrl}
                           alt={title}
                           fill
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          className="object-contain transition-transform duration-300 group-hover:scale-105"
                           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                       ) : (

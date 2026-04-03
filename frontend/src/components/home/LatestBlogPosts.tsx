@@ -48,13 +48,13 @@ export default function LatestBlogPosts({ t, locale, posts }: LatestBlogPostsPro
                 className="group bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all duration-200"
               >
                 {/* Image */}
-                <div className="relative h-48 bg-gray-100">
+                <div className="relative aspect-[16/9] bg-gray-100">
                   {imageUrl ? (
                     <Image
                       src={imageUrl}
                       alt={title}
                       fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="object-contain transition-transform duration-300 group-hover:scale-105"
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
                   ) : (

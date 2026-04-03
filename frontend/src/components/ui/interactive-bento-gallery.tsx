@@ -68,7 +68,7 @@ export default function InteractiveBentoGallery({
       )}
 
       {/* Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[200px]">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 auto-rows-[160px] sm:auto-rows-[200px]">
         {items.map((item, index) => {
           const spanClass = getSpanClasses(item.span, index);
           const photoCount = getAllImages(item).length;

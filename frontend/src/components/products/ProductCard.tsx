@@ -41,13 +41,13 @@ export default function ProductCard({ product, t, locale }: ProductCardProps) {
       <SpotlightCard customSize glowColor="orange" className="flex flex-col h-full">
         {/* Image area */}
         <Link href={`/products/${product.slug}`} className="block">
-          <div className="relative h-52 bg-gray-100 overflow-hidden rounded-t-2xl">
+          <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden rounded-t-2xl">
             {imageUrl ? (
               <Image
                 src={imageUrl}
                 alt={title}
                 fill
-                className="object-cover transition-transform duration-300 hover:scale-105"
+                className="object-contain transition-transform duration-300 hover:scale-105"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
             ) : (

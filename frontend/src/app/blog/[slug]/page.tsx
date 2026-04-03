@@ -62,12 +62,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <article>
       {/* Hero banner */}
       {imageUrl && (
-        <div className="relative h-64 sm:h-80 md:h-96 bg-gray-900 overflow-hidden">
+        <div className="relative aspect-[21/9] bg-gray-900 overflow-hidden">
           <Image
             src={imageUrl}
             alt={title}
             fill
-            className="object-cover opacity-70"
+            className="object-contain opacity-70"
             priority
             sizes="100vw"
           />
