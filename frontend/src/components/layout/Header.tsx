@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, ChevronDown, Phone } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
-import LanguageSwitcher from './LanguageSwitcher';
 import MobileMenu from './MobileMenu';
 import type { Locale, Category } from '@/types';
 
@@ -15,7 +14,7 @@ interface HeaderProps {
 }
 
 export default function Header({ locale, categories = [] }: HeaderProps) {
-  const { t } = useTranslation(locale);
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
@@ -29,11 +28,11 @@ export default function Header({ locale, categories = [] }: HeaderProps) {
   }, []);
 
   const navItems = [
-    { label: t.nav.home, href: `/${locale}` },
-    { label: t.nav.products, href: `/${locale}/products` },
-    { label: t.nav.gallery, href: `/${locale}/gallery` },
-    { label: t.nav.blog, href: `/${locale}/blog` },
-    { label: t.nav.contact, href: `/${locale}/contact` },
+    { label: t.nav.home, href: `/` },
+    { label: t.nav.products, href: `/products` },
+    { label: t.nav.gallery, href: `/gallery` },
+    { label: t.nav.blog, href: `/blog` },
+    { label: t.nav.contact, href: `/contact` },
   ];
 
   return (
@@ -47,16 +46,14 @@ export default function Header({ locale, categories = [] }: HeaderProps) {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link
-              href={`/${locale}`}
+              href={`/`}
               className="flex-shrink-0"
             >
-              <Image
-                src="/logo.png"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo.svg"
                 alt="4WD.az"
-                width={268}
-                height={180}
-                className="h-[138px] w-auto"
-                priority
+                className="h-12 w-auto"
               />
             </Link>
 
@@ -91,7 +88,7 @@ export default function Header({ locale, categories = [] }: HeaderProps) {
                   {categoriesOpen && (
                     <div className="absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-50">
                       <Link
-                        href={`/${locale}/products`}
+                        href={`/products`}
                         className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors font-medium"
                       >
                         {t.nav.allProducts}
@@ -100,7 +97,7 @@ export default function Header({ locale, categories = [] }: HeaderProps) {
                       {categories.map((cat) => (
                         <Link
                           key={cat.id}
-                          href={`/${locale}/categories/${cat.slug}`}
+                          href={`/categories/${cat.slug}`}
                           className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-orange-50 hover:text-orange-600 transition-colors"
                         >
                           {locale === 'az' ? cat.name_az || cat.name : cat.name_en || cat.name}
@@ -122,11 +119,6 @@ export default function Header({ locale, categories = [] }: HeaderProps) {
                 <Phone className="w-4 h-4" />
                 <span>+994 50 123 45 67</span>
               </a>
-
-              {/* Language switcher (desktop) */}
-              <div className="hidden lg:block">
-                <LanguageSwitcher locale={locale} />
-              </div>
 
               {/* Hamburger (mobile) */}
               <button

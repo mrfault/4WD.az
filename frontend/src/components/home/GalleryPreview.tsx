@@ -43,7 +43,7 @@ export default function GalleryPreview({ t, locale, items }: GalleryPreviewProps
           subtitle={t.home.galleryPreviewSubtitle}
           action={
             <Link
-              href={`/${locale}/gallery`}
+              href={`/gallery`}
               className="flex items-center gap-1 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors"
             >
               {t.home.viewGallery}

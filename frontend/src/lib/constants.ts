@@ -4,7 +4,7 @@ export const API_BASE_URL =
 export const STORAGE_BASE_URL =
   process.env.NEXT_PUBLIC_STORAGE_URL || 'http://localhost:8000';
 
-export const SUPPORTED_LOCALES = ['az', 'en'] as const;
+export const SUPPORTED_LOCALES = ['az'] as const;
 export const DEFAULT_LOCALE = 'az';
 
 export const ITEMS_PER_PAGE = 12;

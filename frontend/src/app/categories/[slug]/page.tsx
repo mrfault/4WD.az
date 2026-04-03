@@ -4,19 +4,19 @@ import Link from 'next/link';
 import type { Locale, FilterParams } from '@/types';
 import { getTranslation } from '@/lib/getTranslation';
 import { getCategoryBySlug, getProducts, getVehicleBrands } from '@/lib/api';
-import ProductsPageClient from '@/app/[locale]/products/_client';
+import ProductsPageClient from '@/app/products/_client';
 
 interface CategoryPageProps {
-  params: Promise<{ locale: string; slug: string }>;
+  params: Promise<{ slug: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { slug } = await params as any;
   try {
-    const category = await getCategoryBySlug(slug, locale as Locale);
+    const category = await getCategoryBySlug(slug, 'az');
     const name =
-      locale === 'az' ? category.name_az || category.name : category.name_en || category.name;
+      'az' === 'az' ? category.name_az || category.name : category.name_en || category.name;
     return { title: name };
   } catch {
     return { title: 'Category' };
@@ -24,20 +24,21 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 }
 
 export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
-  const { locale, slug } = await params;
+  const locale = 'az';
+  const { slug } = await params as any;
   const sp = await searchParams;
-  const safeLocale = locale as Locale;
-  const t = getTranslation(safeLocale);
+  
+  const t = getTranslation();
 
   let category;
   try {
-    category = await getCategoryBySlug(slug, safeLocale);
+    category = await getCategoryBySlug(slug, 'az');
   } catch {
     notFound();
   }
 
   const categoryName =
-    safeLocale === 'az' ? category.name_az || category.name : category.name_en || category.name;
+    'az' === 'az' ? category.name_az || category.name : category.name_en || category.name;
 
   const filters: FilterParams = {
     category: slug,
@@ -54,8 +55,8 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   };
 
   const [productsRes, brands] = await Promise.allSettled([
-    getProducts(safeLocale, filters),
-    getVehicleBrands(safeLocale),
+    getProducts('az', filters),
+    getVehicleBrands('az'),
   ]);
 
   const products =
@@ -71,11 +72,11 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
       <div className="bg-gradient-to-r from-gray-900 to-gray-800 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center gap-2 text-sm text-gray-400 mb-4">
-            <Link href={`/${safeLocale}`} className="hover:text-white transition-colors">
+            <Link href={`/`} className="hover:text-white transition-colors">
               {t.nav.home}
             </Link>
             <span>/</span>
-            <Link href={`/${safeLocale}/products`} className="hover:text-white transition-colors">
+            <Link href={`/products`} className="hover:text-white transition-colors">
               {t.nav.products}
             </Link>
             <span>/</span>
@@ -84,7 +85,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
           <h1 className="text-3xl font-black text-white">{categoryName}</h1>
           {(category.description_az || category.description_en || category.description) && (
             <p className="text-gray-400 mt-2 max-w-2xl">
-              {safeLocale === 'az'
+              {'az' === 'az'
                 ? category.description_az ?? category.description
                 : category.description_en ?? category.description}
             </p>
@@ -94,7 +95,7 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
 
       <ProductsPageClient
         t={t}
-        locale={safeLocale}
+        locale={'az'}
         initialProducts={products}
         categories={[]}
         brands={vehicleBrands}

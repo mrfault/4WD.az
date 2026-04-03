@@ -51,7 +51,7 @@ export default function FeaturedCategories({
           subtitle={t.home.featuredCategoriesSubtitle}
           action={
             <Link
-              href={`/${locale}/products`}
+              href={`/products`}
               className="flex items-center gap-1 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors"
             >
               {t.common.viewAll}
@@ -67,7 +67,7 @@ export default function FeaturedCategories({
             return (
               <Link
                 key={cat.id}
-                href={`/${locale}/categories/${cat.slug}`}
+                href={`/categories/${cat.slug}`}
                 className="group flex flex-col items-center gap-3 p-5 rounded-2xl border border-gray-100 hover:border-orange-200 hover:bg-orange-50 transition-all duration-200 text-center"
               >
                 <div className="w-14 h-14 rounded-xl bg-orange-100 flex items-center justify-center flex-shrink-0 group-hover:bg-orange-200 transition-colors">

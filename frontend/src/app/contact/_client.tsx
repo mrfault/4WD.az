@@ -63,11 +63,11 @@ export default function ContactPageClient({ t, locale, settings }: ContactPageCl
   const phone = settings?.contact_phone ?? null;
   const email = settings?.contact_email ?? null;
   const address =
-    locale === 'az'
+    'az' === 'az'
       ? settings?.address_az
       : settings?.address_en;
   const workingHours =
-    locale === 'az'
+    'az' === 'az'
       ? settings?.working_hours_az
       : settings?.working_hours_en;
 

@@ -23,7 +23,7 @@ export default function LatestBlogPosts({ t, locale, posts }: LatestBlogPostsPro
           subtitle={t.home.latestBlogSubtitle}
           action={
             <Link
-              href={`/${locale}/blog`}
+              href={`/blog`}
               className="flex items-center gap-1 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors"
             >
               {t.home.viewAllBlog}
@@ -44,7 +44,7 @@ export default function LatestBlogPosts({ t, locale, posts }: LatestBlogPostsPro
             return (
               <Link
                 key={post.id}
-                href={`/${locale}/blog/${post.slug}`}
+                href={`/blog/${post.slug}`}
                 className="group bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all duration-200"
               >
                 {/* Image */}

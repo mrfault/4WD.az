@@ -5,26 +5,26 @@ import { getGalleryItems, getVehicleBrands, getCategories } from '@/lib/api';
 import GalleryPageClient from './_client';
 
 interface GalleryPageProps {
-  params: Promise<{ locale: string }>;
+  params: Promise<{}>;
   searchParams: Promise<{ brand?: string; category?: string }>;
 }
 
 export async function generateMetadata({ params }: GalleryPageProps): Promise<Metadata> {
-  const { locale } = await params;
-  const t = getTranslation(locale as Locale);
+  
+  const t = getTranslation();
   return { title: t.gallery.title };
 }
 
 export default async function GalleryPage({ params, searchParams }: GalleryPageProps) {
-  const { locale } = await params;
+  
   const { brand, category } = await searchParams;
-  const safeLocale = locale as Locale;
-  const t = getTranslation(safeLocale);
+  
+  const t = getTranslation();
 
   const [galleryRes, brandsRes, categoriesRes] = await Promise.allSettled([
-    getGalleryItems(safeLocale, { brand, category }),
-    getVehicleBrands(safeLocale),
-    getCategories(safeLocale),
+    getGalleryItems('az', { brand, category }),
+    getVehicleBrands('az'),
+    getCategories('az'),
   ]);
 
   const items = galleryRes.status === 'fulfilled' ? galleryRes.value : [];
@@ -34,7 +34,7 @@ export default async function GalleryPage({ params, searchParams }: GalleryPageP
   return (
     <GalleryPageClient
       t={t}
-      locale={safeLocale}
+      locale={'az'}
       items={items}
       brands={brands}
       categories={categories}

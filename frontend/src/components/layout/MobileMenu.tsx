@@ -6,7 +6,6 @@ import { Dialog, Transition } from '@headlessui/react';
 import { X, ChevronRight } from 'lucide-react';
 import type { Translations } from '@/i18n/az';
 import type { Locale, Category } from '@/types';
-import LanguageSwitcher from './LanguageSwitcher';
 
 interface NavItem {
   label: string;
@@ -97,7 +96,7 @@ export default function MobileMenu({
                           {categories.map((cat) => (
                             <Link
                               key={cat.id}
-                              href={`/${locale}/categories/${cat.slug}`}
+                              href={`/categories/${cat.slug}`}
                               onClick={onClose}
                               className="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-600 text-sm hover:bg-orange-50 hover:text-orange-600 transition-colors"
                             >
@@ -111,7 +110,12 @@ export default function MobileMenu({
 
                     {/* Footer */}
                     <div className="px-5 py-4 border-t border-gray-100">
-                      <LanguageSwitcher locale={locale} />
+                      <a
+                        href="tel:+994501234567"
+                        className="flex items-center gap-2 text-sm font-medium text-orange-500"
+                      >
+                        +994 50 123 45 67
+                      </a>
                     </div>
                   </div>
                 </Dialog.Panel>

@@ -25,7 +25,7 @@ export default function DiscountedProducts({ t, locale, products }: DiscountedPr
             <p className="text-gray-500 text-sm md:text-base">{t.home.discountedSubtitle}</p>
           </div>
           <Link
-            href={`/${locale}/products?is_discounted=true`}
+            href={`/products?is_discounted=true`}
             className="flex-shrink-0 flex items-center gap-1 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors"
           >
             {t.common.viewAll}

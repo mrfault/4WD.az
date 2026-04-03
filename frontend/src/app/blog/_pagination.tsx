@@ -18,7 +18,7 @@ export default function BlogPagination({
   t,
 }: BlogPaginationProps) {
   function getPageHref(page: number) {
-    return `/${locale}/blog${page > 1 ? `?page=${page}` : ''}`;
+    return `/blog${page > 1 ? `?page=${page}` : ''}`;
   }
 
   return (

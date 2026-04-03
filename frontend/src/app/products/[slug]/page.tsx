@@ -14,15 +14,15 @@ import PriceDisplay from '@/components/shared/PriceDisplay';
 import ProductDetailCTA from './_cta';
 
 interface ProductPageProps {
-  params: Promise<{ locale: string; slug: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { slug } = await params as any;
   try {
-    const product = await getProductBySlug(slug, locale as Locale);
+    const product = await getProductBySlug(slug, 'az');
     const title =
-      locale === 'az' ? product.title_az || product.title : product.title_en || product.title;
+      'az' === 'az' ? product.title_az || product.title : product.title_en || product.title;
     const img = (product.images?.[0] as any)?.url;
     return {
       title,
@@ -35,9 +35,10 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
 }
 
 export default async function ProductDetailPage({ params }: ProductPageProps) {
-  const { locale, slug } = await params;
-  const safeLocale = locale as Locale;
-  const t = getTranslation(safeLocale);
+  const locale = 'az';
+  const { slug } = await params as any;
+  
+  const t = getTranslation();
 
   let product: any;
   let related: any[] = [];
@@ -45,7 +46,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1'}/products/${slug}`,
       {
-        headers: { 'Accept-Language': safeLocale },
+        headers: { 'Accept-Language': 'az' },
         next: { revalidate: 60 },
       }
     );
@@ -58,20 +59,20 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   }
 
   const title =
-    safeLocale === 'az' ? product.title_az || product.title : product.title_en || product.title;
+    'az' === 'az' ? product.title_az || product.title : product.title_en || product.title;
 
   const description =
-    safeLocale === 'az'
+    'az' === 'az'
       ? product.description_az ?? product.description
       : product.description_en ?? product.description;
 
   const shortDescription =
-    safeLocale === 'az'
+    'az' === 'az'
       ? product.short_description_az ?? product.short_description
       : product.short_description_en ?? product.short_description;
 
   const categoryName = product.category
-    ? safeLocale === 'az'
+    ? 'az' === 'az'
       ? product.category.name_az || product.category.name
       : product.category.name_en || product.category.name
     : '';
@@ -90,18 +91,18 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
-        <Link href={`/${safeLocale}`} className="hover:text-orange-500 transition-colors">
+        <Link href={`/`} className="hover:text-orange-500 transition-colors">
           {t.nav.home}
         </Link>
         <span>/</span>
-        <Link href={`/${safeLocale}/products`} className="hover:text-orange-500 transition-colors">
+        <Link href={`/products`} className="hover:text-orange-500 transition-colors">
           {t.nav.products}
         </Link>
         {product.category && (
           <>
             <span>/</span>
             <Link
-              href={`/${safeLocale}/categories/${product.category.slug}`}
+              href={`/categories/${product.category.slug}`}
               className="hover:text-orange-500 transition-colors"
             >
               {categoryName}
@@ -125,7 +126,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           {product.category && (
             <div>
               <Link
-                href={`/${safeLocale}/categories/${product.category.slug}`}
+                href={`/categories/${product.category.slug}`}
                 className="text-sm text-orange-500 font-semibold hover:underline"
               >
                 {categoryName}
@@ -182,7 +183,7 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           {/* CTA button */}
           <ProductDetailCTA
             t={t}
-            locale={safeLocale}
+            locale={'az'}
             productId={product.id}
             productTitle={title}
           />
@@ -206,14 +207,14 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
       {related && related.length > 0 && (
         <div className="mt-16">
           <h2 className="text-2xl font-bold text-gray-900 mb-8">{t.product.relatedProducts}</h2>
-          <ProductGrid products={related.slice(0, 3)} t={t} locale={safeLocale} />
+          <ProductGrid products={related.slice(0, 3)} t={t} locale={'az'} />
         </div>
       )}
 
       {/* Back link */}
       <div className="mt-12 pt-6 border-t border-gray-100">
         <Link
-          href={`/${safeLocale}/products`}
+          href={`/products`}
           className="inline-flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-orange-500 transition-colors"
         >
           <ChevronLeft className="w-4 h-4" />

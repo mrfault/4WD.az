@@ -5,21 +5,21 @@ import { getProducts, getCategories, getVehicleBrands } from '@/lib/api';
 import ProductsPageClient from './_client';
 
 interface ProductsPageProps {
-  params: Promise<{ locale: string }>;
+  params: Promise<{}>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export async function generateMetadata({ params }: ProductsPageProps): Promise<Metadata> {
-  const { locale } = await params;
-  const t = getTranslation(locale as Locale);
+  
+  const t = getTranslation();
   return { title: t.nav.products };
 }
 
 export default async function ProductsPage({ params, searchParams }: ProductsPageProps) {
-  const { locale } = await params;
+  
   const sp = await searchParams;
-  const safeLocale = locale as Locale;
-  const t = getTranslation(safeLocale);
+  
+  const t = getTranslation();
 
   // Build filter params from search params
   const filters: FilterParams = {
@@ -37,9 +37,9 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
   };
 
   const [productsRes, categories, brands] = await Promise.allSettled([
-    getProducts(safeLocale, filters),
-    getCategories(safeLocale),
-    getVehicleBrands(safeLocale),
+    getProducts('az', filters),
+    getCategories('az'),
+    getVehicleBrands('az'),
   ]);
 
   const products =
@@ -52,7 +52,7 @@ export default async function ProductsPage({ params, searchParams }: ProductsPag
   return (
     <ProductsPageClient
       t={t}
-      locale={safeLocale}
+      locale={'az'}
       initialProducts={products}
       categories={cats}
       brands={vehicleBrands}

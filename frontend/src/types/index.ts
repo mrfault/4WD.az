@@ -209,7 +209,7 @@ export interface Settings {
 
 // ─── UI helpers ───────────────────────────────────────────────────────────────
 
-export type Locale = 'az' | 'en';
+export type Locale = 'az';
 
 export interface FilterParams {
   category?: string;

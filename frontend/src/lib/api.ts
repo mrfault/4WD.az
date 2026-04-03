@@ -24,7 +24,7 @@ async function fetchRaw<T>(path: string, locale: Locale, init?: RequestInit): Pr
       ...(init?.headers as Record<string, string> | undefined),
     },
     ...init,
-    next: { revalidate: 60 },
+    cache: 'no-store',
   });
   if (!res.ok) {
     throw new Error(`API error ${res.status}: ${path}`);

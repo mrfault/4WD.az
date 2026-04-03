@@ -9,17 +9,17 @@ import { getBlogPostBySlug } from '@/lib/api';
 import { getImageUrl, formatDate } from '@/lib/utils';
 
 interface BlogPostPageProps {
-  params: Promise<{ locale: string; slug: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
-  const { locale, slug } = await params;
+  const { slug } = await params as any;
   try {
-    const post = await getBlogPostBySlug(slug, locale as Locale);
+    const post = await getBlogPostBySlug(slug, 'az');
     const title =
-      locale === 'az' ? post.title_az || post.title : post.title_en || post.title;
+      'az' === 'az' ? post.title_az || post.title : post.title_en || post.title;
     const excerpt =
-      locale === 'az' ? post.excerpt_az ?? post.excerpt : post.excerpt_en ?? post.excerpt;
+      'az' === 'az' ? post.excerpt_az ?? post.excerpt : post.excerpt_en ?? post.excerpt;
     const imageUrl = getImageUrl(post.featured_image);
     return {
       title,
@@ -38,22 +38,23 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { locale, slug } = await params;
-  const safeLocale = locale as Locale;
-  const t = getTranslation(safeLocale);
+  const locale = 'az';
+  const { slug } = await params as any;
+  
+  const t = getTranslation();
 
   let post;
   try {
-    post = await getBlogPostBySlug(slug, safeLocale);
+    post = await getBlogPostBySlug(slug, 'az');
   } catch {
     notFound();
   }
 
   const title =
-    safeLocale === 'az' ? post.title_az || post.title : post.title_en || post.title;
+    'az' === 'az' ? post.title_az || post.title : post.title_en || post.title;
 
   const content =
-    safeLocale === 'az' ? post.content_az || post.content : post.content_en || post.content;
+    'az' === 'az' ? post.content_az || post.content : post.content_en || post.content;
 
   const imageUrl = getImageUrl(post.featured_image);
 
@@ -77,7 +78,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Back link */}
         <Link
-          href={`/${safeLocale}/blog`}
+          href={`/blog`}
           className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-orange-500 transition-colors mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
@@ -94,7 +95,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             {post.published_at && (
               <span className="flex items-center gap-1.5">
                 <Calendar className="w-4 h-4" />
-                {formatDate(post.published_at, safeLocale)}
+                {formatDate(post.published_at, 'az')}
               </span>
             )}
             {post.author && (
@@ -128,7 +129,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         {/* Back to blog */}
         <div className="mt-12 pt-8 border-t border-gray-100">
           <Link
-            href={`/${safeLocale}/blog`}
+            href={`/blog`}
             className="inline-flex items-center gap-2 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />

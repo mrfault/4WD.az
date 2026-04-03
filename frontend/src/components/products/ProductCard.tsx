@@ -40,7 +40,7 @@ export default function ProductCard({ product, t, locale }: ProductCardProps) {
     <>
       <SpotlightCard customSize glowColor="orange" className="flex flex-col h-full">
         {/* Image area */}
-        <Link href={`/${locale}/products/${product.slug}`} className="block">
+        <Link href={`/products/${product.slug}`} className="block">
           <div className="relative h-52 bg-gray-100 overflow-hidden rounded-t-2xl">
             {imageUrl ? (
               <Image
@@ -81,7 +81,7 @@ export default function ProductCard({ product, t, locale }: ProductCardProps) {
           </div>
 
           {/* Title */}
-          <Link href={`/${locale}/products/${product.slug}`}>
+          <Link href={`/products/${product.slug}`}>
             <h3 className="font-bold text-gray-900 text-sm leading-snug hover:text-orange-600 transition-colors line-clamp-2 mb-2">
               {title}
             </h3>

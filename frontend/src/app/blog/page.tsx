@@ -9,26 +9,26 @@ import { getImageUrl, formatDate, truncate } from '@/lib/utils';
 import BlogPagination from './_pagination';
 
 interface BlogPageProps {
-  params: Promise<{ locale: string }>;
+  params: Promise<{}>;
   searchParams: Promise<{ page?: string }>;
 }
 
 export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
-  const { locale } = await params;
-  const t = getTranslation(locale as Locale);
+  
+  const t = getTranslation();
   return { title: t.blog.title };
 }
 
 export default async function BlogPage({ params, searchParams }: BlogPageProps) {
-  const { locale } = await params;
+  
   const { page: pageParam } = await searchParams;
-  const safeLocale = locale as Locale;
-  const t = getTranslation(safeLocale);
+  
+  const t = getTranslation();
   const currentPage = pageParam ? parseInt(pageParam) : 1;
 
   let postsRes;
   try {
-    postsRes = await getBlogPosts(safeLocale, currentPage);
+    postsRes = await getBlogPosts('az', currentPage);
   } catch {
     postsRes = { data: [], meta: { current_page: 1, last_page: 1, per_page: 9, total: 0, from: null, to: null }, links: { first: null, last: null, prev: null, next: null } };
   }
@@ -53,9 +53,9 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {posts.map((post) => {
               const title =
-                safeLocale === 'az' ? post.title_az || post.title : post.title_en || post.title;
+                'az' === 'az' ? post.title_az || post.title : post.title_en || post.title;
               const excerpt =
-                safeLocale === 'az'
+                'az' === 'az'
                   ? post.excerpt_az ?? post.excerpt
                   : post.excerpt_en ?? post.excerpt;
               const imageUrl = getImageUrl(post.featured_image);
@@ -66,7 +66,7 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
                   className="group bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all duration-200 flex flex-col"
                 >
                   {/* Image */}
-                  <Link href={`/${safeLocale}/blog/${post.slug}`} className="block">
+                  <Link href={`/blog/${post.slug}`} className="block">
                     <div className="relative h-52 bg-gray-100 overflow-hidden">
                       {imageUrl ? (
                         <Image
@@ -89,11 +89,11 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
                     {post.published_at && (
                       <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-3">
                         <Calendar className="w-3.5 h-3.5" />
-                        {formatDate(post.published_at, safeLocale)}
+                        {formatDate(post.published_at, 'az')}
                       </div>
                     )}
 
-                    <Link href={`/${safeLocale}/blog/${post.slug}`}>
+                    <Link href={`/blog/${post.slug}`}>
                       <h2 className="font-bold text-gray-900 text-lg leading-snug group-hover:text-orange-600 transition-colors mb-3">
                         {title}
                       </h2>
@@ -106,7 +106,7 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
                     )}
 
                     <Link
-                      href={`/${safeLocale}/blog/${post.slug}`}
+                      href={`/blog/${post.slug}`}
                       className="inline-flex items-center gap-1.5 mt-4 text-sm font-semibold text-orange-500 hover:gap-2.5 transition-all"
                     >
                       {t.blog.readMore}
@@ -121,7 +121,7 @@ export default async function BlogPage({ params, searchParams }: BlogPageProps) 
           {/* Pagination */}
           {totalPages > 1 && (
             <BlogPagination
-              locale={safeLocale}
+              locale={'az'}
               currentPage={currentPage}
               totalPages={totalPages}
               t={t}

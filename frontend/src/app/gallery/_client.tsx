@@ -49,17 +49,22 @@ export default function GalleryPageClient({
   }
 
   const bentoItems: BentoItem[] = items.map((item, index) => {
-    const title = locale === 'az' ? item.title_az || item.title : item.title_en || item.title;
+    const title = 'az' === 'az' ? item.title_az || item.title : item.title_en || item.title;
     const description =
-      locale === 'az'
+      'az' === 'az'
         ? item.description_az ?? item.description
         : item.description_en ?? item.description;
     const imageUrl = getImageUrl(item.image) ?? getImageUrl(item.thumbnail) ?? '';
+
+    const allImages = (item as any).images?.length > 0
+      ? (item as any).images.map((img: string) => img.startsWith('http') ? img : getImageUrl(img) ?? '')
+      : [imageUrl];
 
     return {
       id: item.id,
       title,
       image: imageUrl,
+      images: allImages.filter(Boolean),
       description,
       span: getSpan(index),
     };
@@ -102,7 +107,7 @@ export default function GalleryPageClient({
               <option value="">{t.gallery.allCategories}</option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.slug}>
-                  {locale === 'az' ? cat.name_az || cat.name : cat.name_en || cat.name}
+                  {'az' === 'az' ? cat.name_az || cat.name : cat.name_en || cat.name}
                 </option>
               ))}
             </select>

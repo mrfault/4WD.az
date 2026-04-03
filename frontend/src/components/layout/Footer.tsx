@@ -40,11 +40,11 @@ function YoutubeIcon({ className }: { className?: string }) {
 }
 
 const quickLinks = (locale: Locale, t: Translations) => [
-  { label: t.nav.home, href: `/${locale}` },
-  { label: t.nav.products, href: `/${locale}/products` },
-  { label: t.nav.gallery, href: `/${locale}/gallery` },
-  { label: t.nav.blog, href: `/${locale}/blog` },
-  { label: t.nav.contact, href: `/${locale}/contact` },
+  { label: t.nav.home, href: `/` },
+  { label: t.nav.products, href: `/products` },
+  { label: t.nav.gallery, href: `/gallery` },
+  { label: t.nav.blog, href: `/blog` },
+  { label: t.nav.contact, href: `/contact` },
 ];
 
 export default function Footer({ locale, t, categories = [], settings }: FooterProps) {
@@ -55,12 +55,11 @@ export default function Footer({ locale, t, categories = [], settings }: FooterP
           {/* Column 1 - About */}
           <div>
             <div className="mb-4">
-              <Image
-                src="/logo-white.png"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/logo-dark.svg"
                 alt="4WD.az"
-                width={177}
-                height={120}
-                className="h-48 w-auto"
+                className="h-16 w-auto"
               />
             </div>
             <p className="text-gray-400 text-sm leading-relaxed">{t.footer.aboutText}</p>
@@ -143,7 +142,7 @@ export default function Footer({ locale, t, categories = [], settings }: FooterP
                 {categories.slice(0, 6).map((cat) => (
                   <li key={cat.id}>
                     <Link
-                      href={`/${locale}/categories/${cat.slug}`}
+                      href={`/categories/${cat.slug}`}
                       className="text-gray-400 text-sm hover:text-orange-400 transition-colors"
                     >
                       {locale === 'az' ? cat.name_az || cat.name : cat.name_en || cat.name}

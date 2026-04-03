@@ -160,14 +160,14 @@ export default function HeroSection({ t, locale }: HeroSectionProps) {
             className="flex flex-wrap gap-4 mt-10"
           >
             <Link
-              href={`/${locale}/products`}
+              href={`/products`}
               className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-bold px-7 py-3.5 rounded-xl transition-colors text-base shadow-lg shadow-orange-500/30"
             >
               {t.hero.cta}
               <ArrowRight className="w-5 h-5" />
             </Link>
             <Link
-              href={`/${locale}/contact`}
+              href={`/contact`}
               className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold px-7 py-3.5 rounded-xl transition-colors text-base backdrop-blur-sm"
             >
               <PhoneCall className="w-5 h-5" />

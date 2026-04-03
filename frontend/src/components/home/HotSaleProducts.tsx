@@ -26,7 +26,7 @@ export default function HotSaleProducts({ t, locale, products }: HotSaleProducts
             <p className="text-gray-500 text-sm md:text-base">{t.home.hotSaleSubtitle}</p>
           </div>
           <Link
-            href={`/${locale}/products?is_hot_sale=true`}
+            href={`/products?is_hot_sale=true`}
             className="flex-shrink-0 flex items-center gap-1 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors"
           >
             {t.common.viewAll}
