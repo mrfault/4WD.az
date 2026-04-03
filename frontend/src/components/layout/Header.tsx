@@ -86,23 +86,25 @@ export default function Header({ locale, categories = [] }: HeaderProps) {
                   </button>
 
                   {categoriesOpen && (
-                    <div className="absolute top-full left-0 mt-1 w-52 bg-white rounded-xl shadow-lg border border-gray-100 py-1 z-50">
-                      <Link
-                        href={`/products`}
-                        className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors font-medium"
-                      >
-                        {t.nav.allProducts}
-                      </Link>
-                      <div className="my-1 border-t border-gray-100" />
-                      {categories.map((cat) => (
+                    <div className="absolute top-full left-0 pt-0 w-56 z-50">
+                      <div className="bg-white rounded-xl shadow-lg border border-gray-100 py-1 max-h-[70vh] overflow-y-auto">
                         <Link
-                          key={cat.id}
-                          href={`/categories/${cat.slug}`}
-                          className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                          href={`/products`}
+                          className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors font-medium"
                         >
-                          {locale === 'az' ? cat.name_az || cat.name : cat.name_en || cat.name}
+                          {t.nav.allProducts}
                         </Link>
-                      ))}
+                        <div className="my-1 border-t border-gray-100" />
+                        {categories.map((cat) => (
+                          <Link
+                            key={cat.id}
+                            href={`/categories/${cat.slug}`}
+                            className="block px-4 py-2.5 text-sm text-gray-600 hover:bg-orange-50 hover:text-orange-600 transition-colors"
+                          >
+                            {locale === 'az' ? cat.name_az || cat.name : cat.name_en || cat.name}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
