@@ -155,7 +155,7 @@ export default function ProductFilters({
           <input
             type="number"
             min={0}
-            placeholder={t.product.minPrice}
+            placeholder="Min"
             value={localFilters.min_price}
             onChange={(e) => setLocalFilters((f) => ({ ...f, min_price: e.target.value }))}
             className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors"
@@ -163,7 +163,7 @@ export default function ProductFilters({
           <input
             type="number"
             min={0}
-            placeholder={t.product.maxPrice}
+            placeholder="Max"
             value={localFilters.max_price}
             onChange={(e) => setLocalFilters((f) => ({ ...f, max_price: e.target.value }))}
             className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors"
