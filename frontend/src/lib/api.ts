@@ -68,6 +68,7 @@ export function buildProductQuery(params: FilterParams): string {
   if (params.search) q.set('search', params.search);
   if (params.ordering) q.set('ordering', params.ordering);
   if (params.page && params.page > 1) q.set('page', String(params.page));
+  if (params.per_page) q.set('per_page', String(params.per_page));
   const qs = q.toString();
   return qs ? `?${qs}` : '';
 }

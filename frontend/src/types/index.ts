@@ -223,4 +223,5 @@ export interface FilterParams {
   search?: string;
   ordering?: string;
   page?: number;
+  per_page?: number;
 }
