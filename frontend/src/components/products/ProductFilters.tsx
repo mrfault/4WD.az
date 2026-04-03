@@ -124,7 +124,7 @@ export default function ProductFilters({
         >
           <option value="">{t.product.allBrands}</option>
           {brands.map((b) => (
-            <option key={b.id} value={b.id}>
+            <option key={b.id} value={(b as any).slug ?? b.id}>
               {b.name}
             </option>
           ))}
@@ -141,7 +141,7 @@ export default function ProductFilters({
           >
             <option value="">{t.product.allModels}</option>
             {models.map((m) => (
-              <option key={m.id} value={m.id}>
+              <option key={m.id} value={(m as any).slug ?? m.id}>
                 {m.name}
               </option>
             ))}

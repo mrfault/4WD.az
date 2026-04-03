@@ -57,16 +57,26 @@ export async function getCategoryBySlug(slug: string, locale: Locale): Promise<C
 
 export function buildProductQuery(params: FilterParams): string {
   const q = new URLSearchParams();
-  if (params.category) q.set('category', params.category);
-  if (params.brand) q.set('brand', params.brand);
-  if (params.model) q.set('model', params.model);
-  if (params.min_price) q.set('min_price', params.min_price);
-  if (params.max_price) q.set('max_price', params.max_price);
+  // Map frontend param names to backend param names
+  if (params.category) q.set('category_slug', params.category);
+  if (params.brand) q.set('brand_slug', params.brand);
+  if (params.model) q.set('model_slug', params.model);
+  if (params.min_price) q.set('price_min', params.min_price);
+  if (params.max_price) q.set('price_max', params.max_price);
   if (params.stock_status) q.set('stock_status', params.stock_status);
   if (params.is_hot_sale) q.set('is_hot_sale', 'true');
   if (params.is_discounted) q.set('is_discounted', 'true');
   if (params.search) q.set('search', params.search);
-  if (params.ordering) q.set('ordering', params.ordering);
+  if (params.ordering) {
+    // Map frontend ordering values to backend sort values
+    const sortMap: Record<string, string> = {
+      '-created_at': 'newest',
+      'price': 'price_asc',
+      '-price': 'price_desc',
+      'title': 'newest',
+    };
+    q.set('sort', sortMap[params.ordering] ?? 'newest');
+  }
   if (params.page && params.page > 1) q.set('page', String(params.page));
   if (params.per_page) q.set('per_page', String(params.per_page));
   const qs = q.toString();
