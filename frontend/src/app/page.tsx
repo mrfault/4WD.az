@@ -5,7 +5,6 @@ import {
   getDiscountedProducts,
   getProducts,
   getGalleryItems,
-  getLatestBlogPosts,
   getSettings,
 } from '@/lib/api';
 import HeroSection from '@/components/home/HeroSection';
@@ -14,7 +13,6 @@ import HotSaleProducts from '@/components/home/HotSaleProducts';
 import DiscountedProducts from '@/components/home/DiscountedProducts';
 import ProductsSlider from '@/components/home/ProductsSlider';
 import GalleryPreview from '@/components/home/GalleryPreview';
-import LatestBlogPosts from '@/components/home/LatestBlogPosts';
 import ContactCTA from '@/components/home/ContactCTA';
 
 const locale = 'az';
@@ -22,14 +20,13 @@ const locale = 'az';
 export default async function HomePage() {
   const t = getTranslation();
 
-  const [categories, hotSale, discounted, allProducts, gallery, blogPosts, settings] =
+  const [categories, hotSale, discounted, allProducts, gallery, settings] =
     await Promise.allSettled([
       getCategories(locale),
       getHotSaleProducts(locale, 6),
       getDiscountedProducts(locale, 6),
       getProducts(locale, { per_page: 20 }),
       getGalleryItems(locale),
-      getLatestBlogPosts(locale, 3),
       getSettings(locale),
     ]);
 
@@ -38,7 +35,6 @@ export default async function HomePage() {
   const discountedProducts = discounted.status === 'fulfilled' ? discounted.value.data : [];
   const allProductsList = allProducts.status === 'fulfilled' ? allProducts.value.data : [];
   const galleryItems = gallery.status === 'fulfilled' ? gallery.value : [];
-  const posts = blogPosts.status === 'fulfilled' ? blogPosts.value : [];
   const sett = settings.status === 'fulfilled' ? settings.value : null;
 
   return (
@@ -50,9 +46,6 @@ export default async function HomePage() {
       <DiscountedProducts t={t} locale={locale} products={discountedProducts} />
       {galleryItems.length > 0 && (
         <GalleryPreview t={t} locale={locale} items={galleryItems} />
-      )}
-      {posts.length > 0 && (
-        <LatestBlogPosts t={t} locale={locale} posts={posts} />
       )}
       <ContactCTA t={t} locale={locale} phone={sett?.contact_phone} />
     </>
