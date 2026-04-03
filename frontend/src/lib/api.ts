@@ -182,8 +182,8 @@ export async function getVehicleModels(
   locale: Locale,
   brandId?: number | string
 ): Promise<VehicleModel[]> {
-  const qs = brandId ? `?brand=${brandId}` : '';
-  return fetcher<VehicleModel[]>(`/vehicles/models/${qs}`, locale);
+  if (!brandId) return [];
+  return fetcher<VehicleModel[]>(`/vehicles/brands/${brandId}/models/`, locale);
 }
 
 // ─── Settings ─────────────────────────────────────────────────────────────────
