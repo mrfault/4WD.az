@@ -102,7 +102,7 @@ export default function ProductFilters({
         <select
           value={localFilters.category}
           onChange={(e) => setLocalFilters((f) => ({ ...f, category: e.target.value }))}
-          className="filter-select"
+          className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors appearance-none"
         >
           <option value="">{t.product.allCategories}</option>
           {categories.map((cat) => (
@@ -120,7 +120,7 @@ export default function ProductFilters({
           onChange={(e) =>
             setLocalFilters((f) => ({ ...f, brand: e.target.value, model: '' }))
           }
-          className="filter-select"
+          className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors appearance-none"
         >
           <option value="">{t.product.allBrands}</option>
           {brands.map((b) => (
@@ -137,7 +137,7 @@ export default function ProductFilters({
           <select
             value={localFilters.model}
             onChange={(e) => setLocalFilters((f) => ({ ...f, model: e.target.value }))}
-            className="filter-select"
+            className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors appearance-none"
           >
             <option value="">{t.product.allModels}</option>
             {models.map((m) => (
@@ -158,7 +158,7 @@ export default function ProductFilters({
             placeholder={t.product.minPrice}
             value={localFilters.min_price}
             onChange={(e) => setLocalFilters((f) => ({ ...f, min_price: e.target.value }))}
-            className="filter-input w-full"
+            className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors"
           />
           <input
             type="number"
@@ -166,7 +166,7 @@ export default function ProductFilters({
             placeholder={t.product.maxPrice}
             value={localFilters.max_price}
             onChange={(e) => setLocalFilters((f) => ({ ...f, max_price: e.target.value }))}
-            className="filter-input w-full"
+            className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors"
           />
         </div>
       </FilterGroup>
@@ -181,7 +181,7 @@ export default function ProductFilters({
               stock_status: e.target.value as StockStatus | '',
             }))
           }
-          className="filter-select"
+          className="w-full px-3 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors appearance-none"
         >
           <option value="">{t.product.allStatuses}</option>
           <option value="in_stock">{t.product.inStock}</option>

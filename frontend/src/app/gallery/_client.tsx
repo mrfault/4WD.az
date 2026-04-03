@@ -86,7 +86,7 @@ export default function GalleryPageClient({
             <select
               value={initialBrand ?? ''}
               onChange={(e) => applyFilter('brand', e.target.value)}
-              className="filter-select max-w-xs"
+              className="max-w-xs px-3 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors appearance-none"
             >
               <option value="">{t.gallery.allBrands}</option>
               {brands.map((b) => (
@@ -102,7 +102,7 @@ export default function GalleryPageClient({
             <select
               value={initialCategory ?? ''}
               onChange={(e) => applyFilter('category', e.target.value)}
-              className="filter-select max-w-xs"
+              className="max-w-xs px-3 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 bg-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors appearance-none"
             >
               <option value="">{t.gallery.allCategories}</option>
               {categories.map((cat) => (
