@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Dialog, Transition } from '@headlessui/react';
 import { X, ChevronRight } from 'lucide-react';
 import type { Translations } from '@/i18n/az';
-import type { Locale, Category } from '@/types';
+import type { Locale, Category, Settings } from '@/types';
 
 interface NavItem {
   label: string;
@@ -19,6 +19,7 @@ interface MobileMenuProps {
   categories: Category[];
   t: Translations;
   locale: Locale;
+  settings?: Settings | null;
 }
 
 export default function MobileMenu({
@@ -28,6 +29,7 @@ export default function MobileMenu({
   categories,
   t,
   locale,
+  settings,
 }: MobileMenuProps) {
   return (
     <Transition show={open} as={Fragment}>
@@ -109,14 +111,16 @@ export default function MobileMenu({
                     </nav>
 
                     {/* Footer */}
-                    <div className="px-5 py-4 border-t border-gray-100">
-                      <a
-                        href="tel:+994501234567"
-                        className="flex items-center gap-2 text-sm font-medium text-orange-500"
-                      >
-                        +994 50 123 45 67
-                      </a>
-                    </div>
+                    {settings?.contact_phone && (
+                      <div className="px-5 py-4 border-t border-gray-100">
+                        <a
+                          href={`tel:${settings.contact_phone.replace(/\s/g, '')}`}
+                          className="flex items-center gap-2 text-sm font-medium text-orange-500"
+                        >
+                          {settings.contact_phone}
+                        </a>
+                      </div>
+                    )}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

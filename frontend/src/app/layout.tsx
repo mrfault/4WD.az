@@ -63,7 +63,7 @@ export default async function RootLayout({
   return (
     <html lang="az" className={inter.variable}>
       <body className="min-h-screen flex flex-col antialiased">
-        <Header locale={locale} categories={cats} />
+        <Header locale={locale} categories={cats} settings={sett} />
         <main className="flex-1">{children}</main>
         <Footer locale={locale} t={t} categories={cats} settings={sett} />
       </body>

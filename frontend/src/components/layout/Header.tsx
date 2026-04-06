@@ -6,14 +6,15 @@ import Image from 'next/image';
 import { Menu, ChevronDown, Phone } from 'lucide-react';
 import { useTranslation } from '@/hooks/useTranslation';
 import MobileMenu from './MobileMenu';
-import type { Locale, Category } from '@/types';
+import type { Locale, Category, Settings } from '@/types';
 
 interface HeaderProps {
   locale: Locale;
   categories?: Category[];
+  settings?: Settings | null;
 }
 
-export default function Header({ locale, categories = [] }: HeaderProps) {
+export default function Header({ locale, categories = [], settings }: HeaderProps) {
   const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -114,13 +115,15 @@ export default function Header({ locale, categories = [] }: HeaderProps) {
             {/* Right side */}
             <div className="flex items-center gap-3">
               {/* Phone */}
-              <a
-                href="tel:+994501234567"
-                className="hidden md:flex items-center gap-1.5 text-sm font-semibold text-gray-700 hover:text-orange-500 transition-colors"
-              >
-                <Phone className="w-4 h-4" />
-                <span>+994 50 123 45 67</span>
-              </a>
+              {settings?.contact_phone && (
+                <a
+                  href={`tel:${settings.contact_phone.replace(/\s/g, '')}`}
+                  className="hidden md:flex items-center gap-1.5 text-sm font-semibold text-gray-700 hover:text-orange-500 transition-colors"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>{settings.contact_phone}</span>
+                </a>
+              )}
 
               {/* Hamburger (mobile) */}
               <button
@@ -142,6 +145,7 @@ export default function Header({ locale, categories = [] }: HeaderProps) {
         categories={categories}
         t={t}
         locale={locale}
+        settings={settings}
       />
     </>
   );
