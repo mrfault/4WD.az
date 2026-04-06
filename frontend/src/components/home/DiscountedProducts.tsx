@@ -14,15 +14,15 @@ export default function DiscountedProducts({ t, locale, products }: DiscountedPr
   if (products.length === 0) return null;
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-8 sm:py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-end justify-between mb-8">
+        <div className="flex items-end justify-between mb-5 sm:mb-8">
           <div>
-            <div className="flex items-center gap-2 mb-2">
-              <Tag className="w-6 h-6 text-red-500" />
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{t.home.discounted}</h2>
+            <div className="flex items-center gap-2 mb-1 sm:mb-2">
+              <Tag className="w-5 h-5 sm:w-6 sm:h-6 text-red-500" />
+              <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-gray-900">{t.home.discounted}</h2>
             </div>
-            <p className="text-gray-500 text-sm md:text-base">{t.home.discountedSubtitle}</p>
+            <p className="text-gray-500 text-xs sm:text-sm md:text-base">{t.home.discountedSubtitle}</p>
           </div>
           <Link
             href={`/products?is_discounted=true`}
@@ -33,7 +33,7 @@ export default function DiscountedProducts({ t, locale, products }: DiscountedPr
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {products.slice(0, 6).map((product) => (
             <ProductCard key={product.id} product={product} t={t} locale={locale} />
           ))}

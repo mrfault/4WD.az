@@ -30,15 +30,15 @@ export default function ProductsSlider({ t, locale, products }: ProductsSliderPr
   }
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-8 sm:py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="flex items-end justify-between mb-8">
+        <div className="flex items-end justify-between mb-5 sm:mb-8">
           <div>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
+            <h2 className="text-lg sm:text-2xl md:text-3xl font-bold text-gray-900">
               {t.nav.products}
             </h2>
-            <p className="text-gray-500 text-sm md:text-base mt-1">
+            <p className="text-gray-500 text-xs sm:text-sm md:text-base mt-1">
               {t.home.featuredCategoriesSubtitle}
             </p>
           </div>
@@ -68,16 +68,23 @@ export default function ProductsSlider({ t, locale, products }: ProductsSliderPr
           </div>
         </div>
 
-        {/* Slider */}
+        {/* Mobile: 2-col grid */}
+        <div className="grid grid-cols-2 gap-3 sm:hidden">
+          {products.slice(0, 6).map((product) => (
+            <ProductCard key={product.id} product={product} t={t} locale={locale} />
+          ))}
+        </div>
+
+        {/* Desktop: Slider */}
         <div
           ref={scrollRef}
-          className="flex gap-4 overflow-x-auto scroll-smooth pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide"
+          className="hidden sm:flex gap-4 overflow-x-auto scroll-smooth pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide"
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {products.map((product) => (
             <div
               key={product.id}
-              className="flex-shrink-0 w-[280px] sm:w-[300px] snap-start"
+              className="flex-shrink-0 w-[300px] snap-start"
             >
               <ProductCard product={product} t={t} locale={locale} />
             </div>

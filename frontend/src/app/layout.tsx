@@ -5,6 +5,7 @@ import { getTranslation } from '@/lib/getTranslation';
 import { getCategories, getSettings } from '@/lib/api';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import WhatsAppButton from '@/components/layout/WhatsAppButton';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -66,6 +67,7 @@ export default async function RootLayout({
         <Header locale={locale} categories={cats} settings={sett} />
         <main className="flex-1">{children}</main>
         <Footer locale={locale} t={t} categories={cats} settings={sett} />
+        {sett?.whatsapp_number && <WhatsAppButton phone={sett.whatsapp_number} />}
       </body>
     </html>
   );

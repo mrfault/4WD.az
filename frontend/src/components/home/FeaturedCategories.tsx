@@ -44,7 +44,7 @@ export default function FeaturedCategories({
   if (!categories || categories.length === 0) return null;
 
   return (
-    <section className="py-16 bg-white">
+    <section className="hidden sm:block py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           title={t.home.featuredCategories}
@@ -60,7 +60,7 @@ export default function FeaturedCategories({
           }
         />
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div className="grid sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
           {categories.slice(0, 10).map((cat) => {
             const name = locale === 'az' ? cat.name_az || cat.name : cat.name_en || cat.name;
             const IconComponent = categoryIcons[cat.slug] || Tag;
