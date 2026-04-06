@@ -41,7 +41,7 @@ export default function ProductCard({ product, t, locale }: ProductCardProps) {
       <SpotlightCard customSize glowColor="orange" className="flex flex-col h-full">
         {/* Image area */}
         <Link href={`/products/${product.slug}`} className="block">
-          <div className="relative aspect-[4/3] bg-gray-100 overflow-hidden rounded-t-2xl">
+          <div className="relative aspect-[4/3] bg-white overflow-hidden rounded-t-2xl">
             {imageUrl ? (
               <Image
                 src={imageUrl}
@@ -51,7 +51,7 @@ export default function ProductCard({ product, t, locale }: ProductCardProps) {
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
             ) : (
-              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-orange-50 to-gray-100">
+              <div className="absolute inset-0 flex items-center justify-center bg-white">
                 <span className="text-orange-200 text-3xl font-black">4WD</span>
               </div>
             )}
