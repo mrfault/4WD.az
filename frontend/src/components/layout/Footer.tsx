@@ -207,7 +207,7 @@ export default function Footer({ locale, t, categories = [], settings }: FooterP
 
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-white/10 text-center text-gray-500 text-sm">
-          {t.footer.copyright}
+          &copy; {new Date().getFullYear()} 4WD.az. Bütün hüquqlar qorunur.
         </div>
       </div>
     </footer>
