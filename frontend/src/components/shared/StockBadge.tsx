@@ -19,7 +19,7 @@ export default function StockBadge({ status, t }: StockBadgeProps) {
   const config = statusConfig[status] ?? statusConfig.out_of_stock;
   return (
     <span
-      className={`inline-flex items-center px-2 py-0.5 rounded-md text-xs font-semibold ${config.className}`}
+      className={`inline-flex items-center px-1.5 sm:px-2 py-0.5 rounded-md text-[10px] sm:text-xs font-semibold whitespace-nowrap ${config.className}`}
     >
       {t.product[config.label] as string}
     </span>

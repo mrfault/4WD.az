@@ -23,9 +23,9 @@ export default async function HomePage() {
   const [categories, hotSale, discounted, allProducts, gallery, settings] =
     await Promise.allSettled([
       getCategories(locale),
-      getHotSaleProducts(locale, 6),
-      getDiscountedProducts(locale, 6),
-      getProducts(locale, { per_page: 20 }),
+      getHotSaleProducts(locale, 8),
+      getDiscountedProducts(locale, 8),
+      getProducts(locale, { per_page: 20, ordering: 'random' }),
       getGalleryItems(locale),
       getSettings(locale),
     ]);

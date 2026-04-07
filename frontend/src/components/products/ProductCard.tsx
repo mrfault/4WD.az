@@ -95,11 +95,11 @@ export default function ProductCard({ product, t, locale }: ProductCardProps) {
           {/* Spacer */}
           <div className="flex-1" />
 
-          {/* Price */}
-          <div className="mb-1.5 sm:mb-3">
+          {/* Stock + Price */}
+          <div className="flex items-center justify-between mb-1.5 sm:mb-3">
             <PriceDisplay price={product.price} oldPrice={product.old_price} size="sm" />
+            <StockBadge status={product.stock_status} t={t} />
           </div>
-          <span className="hidden sm:inline-flex mb-3"><StockBadge status={product.stock_status} t={t} /></span>
 
           {/* CTA */}
           <button

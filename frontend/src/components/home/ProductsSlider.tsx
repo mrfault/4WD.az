@@ -1,8 +1,5 @@
-'use client';
-
-import { useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import type { Locale, ProductList } from '@/types';
 import type { Translations } from '@/i18n/az';
 import ProductCard from '@/components/products/ProductCard';
@@ -14,20 +11,7 @@ interface ProductsSliderProps {
 }
 
 export default function ProductsSlider({ t, locale, products }: ProductsSliderProps) {
-  const scrollRef = useRef<HTMLDivElement>(null);
-
   if (products.length === 0) return null;
-
-  function scroll(dir: 'left' | 'right') {
-    if (!scrollRef.current) return;
-    const cardWidth = scrollRef.current.firstElementChild
-      ? (scrollRef.current.firstElementChild as HTMLElement).offsetWidth + 16
-      : 300;
-    scrollRef.current.scrollBy({
-      left: dir === 'left' ? -cardWidth * 2 : cardWidth * 2,
-      behavior: 'smooth',
-    });
-  }
 
   return (
     <section className="py-8 sm:py-16 bg-gray-50">
@@ -42,52 +26,18 @@ export default function ProductsSlider({ t, locale, products }: ProductsSliderPr
               {t.home.featuredCategoriesSubtitle}
             </p>
           </div>
-          <div className="flex items-center gap-2">
-            {/* Desktop arrows */}
-            <button
-              onClick={() => scroll('left')}
-              className="hidden sm:flex w-10 h-10 items-center justify-center rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-              aria-label="Previous"
-            >
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
-            </button>
-            <button
-              onClick={() => scroll('right')}
-              className="hidden sm:flex w-10 h-10 items-center justify-center rounded-full border border-gray-200 bg-white hover:bg-gray-50 transition-colors"
-              aria-label="Next"
-            >
-              <ChevronRight className="w-5 h-5 text-gray-600" />
-            </button>
-            <Link
-              href="/products"
-              className="flex-shrink-0 flex items-center gap-1 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors ml-2"
-            >
-              {t.home.viewAllProducts}
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
+          <Link
+            href="/products"
+            className="flex-shrink-0 flex items-center gap-1 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors"
+          >
+            {t.home.viewAllProducts}
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
 
-        {/* Mobile: 2-col grid */}
-        <div className="grid grid-cols-2 gap-3 sm:hidden">
-          {products.slice(0, 6).map((product) => (
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+          {products.slice(0, 8).map((product) => (
             <ProductCard key={product.id} product={product} t={t} locale={locale} />
-          ))}
-        </div>
-
-        {/* Desktop: Slider */}
-        <div
-          ref={scrollRef}
-          className="hidden sm:flex gap-4 overflow-x-auto scroll-smooth pb-4 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        >
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className="flex-shrink-0 w-[300px] snap-start"
-            >
-              <ProductCard product={product} t={t} locale={locale} />
-            </div>
           ))}
         </div>
       </div>

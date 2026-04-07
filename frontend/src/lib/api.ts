@@ -73,6 +73,7 @@ export function buildProductQuery(params: FilterParams): string {
       '-created_at': 'newest',
       'price': 'price_asc',
       '-price': 'price_desc',
+      'random': 'random',
       'title': 'newest',
     };
     q.set('sort', sortMap[params.ordering] ?? 'newest');
