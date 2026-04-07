@@ -134,8 +134,8 @@ export async function getGalleryItems(
   params: { brand?: string; category?: string } = {}
 ): Promise<GalleryItem[]> {
   const q = new URLSearchParams();
-  if (params.brand) q.set('brand', params.brand);
-  if (params.category) q.set('category', params.category);
+  if (params.brand) q.set('brand_slug', params.brand);
+  if (params.category) q.set('category_slug', params.category);
   const qs = q.toString();
   const res = await fetchPaginated<GalleryItem>(`/gallery/${qs ? `?${qs}` : ''}`, locale);
   return res.data ?? [];

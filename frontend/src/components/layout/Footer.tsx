@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
 import type { Locale, Category, Settings } from '@/types';
 import type { Translations } from '@/i18n/az';
@@ -197,12 +196,14 @@ export default function Footer({ locale, t, categories = [], settings }: FooterP
             <div>
               <h3 className="font-bold text-sm uppercase tracking-wider text-gray-300 mb-4">{t.footer.contact}</h3>
               <ul className="space-y-3 text-sm text-gray-400">
+                {settings?.contact_phone && (
                 <li className="flex items-start gap-2.5">
                   <Phone className="w-4 h-4 text-orange-400 mt-0.5 flex-shrink-0" />
-                  <a href={`tel:${settings?.contact_phone?.replace(/\s/g, '') ?? '+994501234567'}`} className="hover:text-orange-400 transition-colors">
-                    {settings?.contact_phone || '+994 50 123 45 67'}
+                  <a href={`tel:${settings.contact_phone.replace(/\s/g, '')}`} className="hover:text-orange-400 transition-colors">
+                    {settings.contact_phone}
                   </a>
                 </li>
+                )}
                 {settings?.contact_email && (
                   <li className="flex items-start gap-2.5">
                     <Mail className="w-4 h-4 text-orange-400 mt-0.5 flex-shrink-0" />

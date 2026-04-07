@@ -181,12 +181,13 @@ export interface BlogPost {
 export type LeadSource = 'product' | 'contact' | 'hero' | 'general';
 
 export interface LeadFormData {
-  name?: string;
+  customer_name?: string;
   phone: string;
   message?: string;
   source: LeadSource;
-  product?: number | null;
-  product_title?: string | null;
+  product_id?: number | null;
+  page_url?: string;
+  locale?: string;
 }
 
 export interface Lead {

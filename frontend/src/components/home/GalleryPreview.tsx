@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, X, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -31,12 +31,12 @@ export default function GalleryPreview({ t, locale, items }: GalleryPreviewProps
     setLightbox((i) => (i !== null ? (i + 1) % items.length : null));
   }
 
-  let touchStartX = 0;
+  const touchStartX = useRef(0);
   function handleTouchStart(e: React.TouchEvent) {
-    touchStartX = e.touches[0].clientX;
+    touchStartX.current = e.touches[0].clientX;
   }
   function handleTouchEnd(e: React.TouchEvent) {
-    const delta = e.changedTouches[0].clientX - touchStartX;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
     if (Math.abs(delta) > 50) {
       if (delta < 0) next();
       else prev();

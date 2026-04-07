@@ -32,9 +32,16 @@ export default function BlogPagination({
         </Link>
       )}
 
-      {Array.from({ length: Math.min(totalPages, 7) }, (_, i) => {
-        const page = i + 1;
-        return (
+      {(() => {
+        const maxVisible = 7;
+        const half = Math.floor(maxVisible / 2);
+        let start = Math.max(1, currentPage - half);
+        let end = Math.min(totalPages, start + maxVisible - 1);
+        if (end - start + 1 < maxVisible) {
+          start = Math.max(1, end - maxVisible + 1);
+        }
+        const pages = Array.from({ length: end - start + 1 }, (_, i) => start + i);
+        return pages.map((page) => (
           <Link
             key={page}
             href={getPageHref(page)}
@@ -46,8 +53,8 @@ export default function BlogPagination({
           >
             {page}
           </Link>
-        );
-      })}
+        ));
+      })()}
 
       {currentPage < totalPages && (
         <Link

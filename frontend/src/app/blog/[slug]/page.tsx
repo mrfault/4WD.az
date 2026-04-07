@@ -151,19 +151,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </div>
         </header>
 
-        {/* Featured image (if no hero banner) */}
-        {imageUrl && !imageUrl && (
-          <div className="relative h-64 rounded-2xl overflow-hidden mb-8">
-            <Image
-              src={imageUrl}
-              alt={title}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 768px"
-            />
-          </div>
-        )}
-
         {/* Content */}
         <div
           className="prose max-w-none"

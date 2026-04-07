@@ -45,7 +45,7 @@ export default function ContactPageClient({ t, locale, settings }: ContactPageCl
     setLoading(true);
     try {
       const payload: LeadFormData = {
-        name: form.name.trim() || undefined,
+        customer_name: form.name.trim() || undefined,
         phone: form.phone.trim(),
         message: form.message.trim() || undefined,
         source: 'contact',

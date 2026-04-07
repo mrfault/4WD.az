@@ -61,12 +61,13 @@ export default function LeadFormModal({
     setLoading(true);
     try {
       const payload: LeadFormData = {
-        name: form.name.trim() || undefined,
+        customer_name: form.name.trim() || undefined,
         phone: form.phone.trim(),
         message: form.message.trim() || undefined,
         source,
-        product: productId,
-        product_title: productTitle,
+        product_id: productId,
+        page_url: typeof window !== 'undefined' ? window.location.href : undefined,
+        locale,
       };
       await createLead(payload);
       setSuccess(true);

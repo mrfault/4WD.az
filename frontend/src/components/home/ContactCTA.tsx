@@ -29,13 +29,15 @@ export default function ContactCTA({ t, locale, phone }: ContactCTAProps) {
           <p className="text-gray-400 text-lg mb-10">{t.home.contactCTASubtitle}</p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            {phone && (
             <a
-              href={`tel:${(phone ?? '+994501234567').replace(/\s/g, '')}`}
+              href={`tel:${phone.replace(/\s/g, '')}`}
               className="inline-flex items-center gap-2.5 bg-orange-500 hover:bg-orange-600 text-white font-bold px-8 py-4 rounded-xl transition-colors text-base shadow-lg shadow-orange-500/20"
             >
               <Phone className="w-5 h-5" />
-              {phone ?? '+994 50 123 45 67'}
+              {phone}
             </a>
+            )}
             <button
               onClick={() => setModalOpen(true)}
               className="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold px-8 py-4 rounded-xl transition-colors text-base"
