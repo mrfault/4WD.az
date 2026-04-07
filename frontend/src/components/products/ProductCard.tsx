@@ -40,7 +40,7 @@ export default function ProductCard({ product, t, locale }: ProductCardProps) {
     <>
       <SpotlightCard customSize glowColor="orange" className="flex flex-col h-full">
         {/* Image area */}
-        <Link href={`/products/${product.slug}`} className="block">
+        <Link href={`/categories/${product.category.slug}/${product.slug}`} className="block">
           <div className="relative aspect-square sm:aspect-[4/3] bg-white overflow-hidden rounded-t-xl sm:rounded-t-2xl">
             {imageUrl ? (
               <Image
@@ -81,7 +81,7 @@ export default function ProductCard({ product, t, locale }: ProductCardProps) {
           </div>
 
           {/* Title */}
-          <Link href={`/products/${product.slug}`}>
+          <Link href={`/categories/${product.category.slug}/${product.slug}`}>
             <h3 className="font-semibold sm:font-bold text-gray-900 text-[11px] sm:text-sm leading-tight sm:leading-snug hover:text-orange-600 transition-colors line-clamp-2 mb-1 sm:mb-2">
               {title}
             </h3>

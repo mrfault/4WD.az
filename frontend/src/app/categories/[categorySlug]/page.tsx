@@ -8,12 +8,12 @@ import ProductsPageClient from '@/app/products/_client';
 import JsonLd from '@/components/shared/JsonLd';
 
 interface CategoryPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ categorySlug: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
-  const { slug } = await params as any;
+  const { categorySlug: slug } = await params as any;
   try {
     const category = await getCategoryBySlug(slug, 'az');
     const name = category.meta_title ||
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
 
 export default async function CategoryPage({ params, searchParams }: CategoryPageProps) {
   const locale = 'az';
-  const { slug } = await params as any;
+  const { categorySlug: slug } = await params as any;
   const sp = await searchParams;
   
   const t = getTranslation();

@@ -4,7 +4,7 @@ import { API_BASE_URL } from '@/lib/constants';
 const SITE_URL = 'https://4wd.az';
 
 async function fetchAllProducts(): Promise<
-  Array<{ slug: string; updated_at: string }>
+  Array<{ slug: string; updated_at: string; category?: { slug: string } }>
 > {
   try {
     const res = await fetch(`${API_BASE_URL}/products/?per_page=1000`, {
@@ -97,12 +97,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ];
 
-  const productPages: MetadataRoute.Sitemap = products.map((product) => ({
-    url: `${SITE_URL}/products/${product.slug}`,
-    lastModified: product.updated_at ? new Date(product.updated_at) : new Date(),
-    changeFrequency: 'weekly',
-    priority: 0.7,
-  }));
+  const productPages: MetadataRoute.Sitemap = products
+    .filter((product) => product.category?.slug)
+    .map((product) => ({
+      url: `${SITE_URL}/categories/${product.category!.slug}/${product.slug}`,
+      lastModified: product.updated_at ? new Date(product.updated_at) : new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    }));
 
   const categoryPages: MetadataRoute.Sitemap = categories.map((category) => ({
     url: `${SITE_URL}/categories/${category.slug}`,
