@@ -7,6 +7,7 @@ import type { Locale } from '@/types';
 import { getTranslation } from '@/lib/getTranslation';
 import { getBlogPostBySlug } from '@/lib/api';
 import { getImageUrl, formatDate } from '@/lib/utils';
+import JsonLd from '@/components/shared/JsonLd';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -16,20 +17,30 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
   const { slug } = await params as any;
   try {
     const post = await getBlogPostBySlug(slug, 'az');
-    const title =
-      'az' === 'az' ? post.title_az || post.title : post.title_en || post.title;
-    const excerpt =
-      'az' === 'az' ? post.excerpt_az ?? post.excerpt : post.excerpt_en ?? post.excerpt;
+    const title = post.meta_title_az || post.meta_title ||
+      ('az' === 'az' ? post.title_az || post.title : post.title_en || post.title);
+    const description = post.meta_description_az || post.meta_description ||
+      ('az' === 'az' ? post.excerpt_az ?? post.excerpt : post.excerpt_en ?? post.excerpt) || title;
     const imageUrl = getImageUrl(post.featured_image);
+    const canonicalUrl = `https://4wd.az/blog/${slug}`;
     return {
       title,
-      description: excerpt ?? title,
+      description,
+      alternates: { canonical: canonicalUrl },
       openGraph: {
         title,
-        description: excerpt ?? undefined,
+        description,
+        url: canonicalUrl,
         images: imageUrl ? [imageUrl] : [],
         type: 'article',
+        siteName: '4WD.az',
         publishedTime: post.published_at ?? undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: imageUrl ? [imageUrl] : [],
       },
     };
   } catch {
@@ -58,8 +69,41 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   const imageUrl = getImageUrl(post.featured_image);
 
+  const excerpt =
+    'az' === 'az' ? post.excerpt_az ?? post.excerpt : post.excerpt_en ?? post.excerpt;
+
   return (
     <article>
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: title,
+          description: excerpt ?? undefined,
+          image: imageUrl ?? undefined,
+          datePublished: post.published_at ?? undefined,
+          author: post.author
+            ? { '@type': 'Person', name: post.author }
+            : { '@type': 'Organization', name: '4WD.az' },
+          publisher: {
+            '@type': 'Organization',
+            name: '4WD.az',
+            logo: { '@type': 'ImageObject', url: 'https://4wd.az/logo.png' },
+          },
+          mainEntityOfPage: `https://4wd.az/blog/${slug}`,
+        }}
+      />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: t.nav.home, item: 'https://4wd.az/' },
+            { '@type': 'ListItem', position: 2, name: t.blog.backToBlog, item: 'https://4wd.az/blog' },
+            { '@type': 'ListItem', position: 3, name: title },
+          ],
+        }}
+      />
       {/* Hero banner */}
       {imageUrl && (
         <div className="relative aspect-[21/9] bg-gray-900 overflow-hidden">

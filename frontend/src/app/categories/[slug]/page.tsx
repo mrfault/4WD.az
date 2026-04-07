@@ -5,6 +5,7 @@ import type { Locale, FilterParams } from '@/types';
 import { getTranslation } from '@/lib/getTranslation';
 import { getCategoryBySlug, getProducts, getVehicleBrands } from '@/lib/api';
 import ProductsPageClient from '@/app/products/_client';
+import JsonLd from '@/components/shared/JsonLd';
 
 interface CategoryPageProps {
   params: Promise<{ slug: string }>;
@@ -15,9 +16,23 @@ export async function generateMetadata({ params }: CategoryPageProps): Promise<M
   const { slug } = await params as any;
   try {
     const category = await getCategoryBySlug(slug, 'az');
-    const name =
-      'az' === 'az' ? category.name_az || category.name : category.name_en || category.name;
-    return { title: name };
+    const name = category.meta_title ||
+      ('az' === 'az' ? category.name_az || category.name : category.name_en || category.name);
+    const description = category.meta_description ||
+      `${name} - 4WD.az-da geniş çeşiddə offroad aksessuarları və 4x4 avadanlıqları.`;
+    const canonicalUrl = `https://4wd.az/categories/${slug}`;
+    return {
+      title: name,
+      description,
+      alternates: { canonical: canonicalUrl },
+      openGraph: {
+        title: `${name} | 4WD.az`,
+        description,
+        url: canonicalUrl,
+        type: 'website',
+        siteName: '4WD.az',
+      },
+    };
   } catch {
     return { title: 'Category' };
   }
@@ -68,6 +83,17 @@ export default async function CategoryPage({ params, searchParams }: CategoryPag
   // Pass empty categories array since we're already scoped to this category
   return (
     <div>
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: t.nav.home, item: 'https://4wd.az/' },
+            { '@type': 'ListItem', position: 2, name: t.nav.products, item: 'https://4wd.az/products' },
+            { '@type': 'ListItem', position: 3, name: categoryName },
+          ],
+        }}
+      />
       {/* Category hero */}
       <div className="bg-gradient-to-r from-gray-900 to-gray-800 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

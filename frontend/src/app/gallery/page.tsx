@@ -10,9 +10,18 @@ interface GalleryPageProps {
 }
 
 export async function generateMetadata({ params }: GalleryPageProps): Promise<Metadata> {
-  
-  const t = getTranslation();
-  return { title: t.gallery.title };
+  return {
+    title: 'Qalereya',
+    description: 'Offroad layihələrimizin foto qalereyası. 4x4 avtomobillər üçün quraşdırılmış aksessuarlar və tuning işləri.',
+    alternates: { canonical: 'https://4wd.az/gallery' },
+    openGraph: {
+      title: 'Qalereya | 4WD.az',
+      description: 'Offroad layihələrimizin foto qalereyası.',
+      url: 'https://4wd.az/gallery',
+      type: 'website',
+      siteName: '4WD.az',
+    },
+  };
 }
 
 export default async function GalleryPage({ params, searchParams }: GalleryPageProps) {

@@ -10,9 +10,18 @@ interface ProductsPageProps {
 }
 
 export async function generateMetadata({ params }: ProductsPageProps): Promise<Metadata> {
-  
-  const t = getTranslation();
-  return { title: t.nav.products };
+  return {
+    title: 'Offroad Məhsulları',
+    description: 'Azərbaycanda offroad məhsulları - lift kit, bamper, winch, led işıqlar və digər 4x4 aksessuarları. Geniş çeşid və əlverişli qiymətlər.',
+    alternates: { canonical: 'https://4wd.az/products' },
+    openGraph: {
+      title: 'Offroad Məhsulları | 4WD.az',
+      description: 'Azərbaycanda offroad məhsulları - lift kit, bamper, winch, led işıqlar və digər 4x4 aksessuarları.',
+      url: 'https://4wd.az/products',
+      type: 'website',
+      siteName: '4WD.az',
+    },
+  };
 }
 
 export default async function ProductsPage({ params, searchParams }: ProductsPageProps) {

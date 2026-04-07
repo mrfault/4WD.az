@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { getTranslation } from '@/lib/getTranslation';
 import {
   getCategories,
@@ -14,6 +15,12 @@ import DiscountedProducts from '@/components/home/DiscountedProducts';
 import ProductsSlider from '@/components/home/ProductsSlider';
 import GalleryPreview from '@/components/home/GalleryPreview';
 import ContactCTA from '@/components/home/ContactCTA';
+
+export const metadata: Metadata = {
+  title: '4WD.az - Azərbaycanda Offroad Aksessuarları və 4x4 Avadanlıqlar',
+  description: '4WD.az - Azərbaycanda offroad aksessuarları, avtomobil tuning, lift kit, bamper, winch və digər 4x4 avadanlıqları. Geniş çeşid, sürətli çatdırılma.',
+  alternates: { canonical: 'https://4wd.az' },
+};
 
 const locale = 'az';
 

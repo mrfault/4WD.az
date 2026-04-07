@@ -12,6 +12,7 @@ import StockBadge from '@/components/shared/StockBadge';
 import DiscountBadge from '@/components/shared/DiscountBadge';
 import PriceDisplay from '@/components/shared/PriceDisplay';
 import ProductDetailCTA from './_cta';
+import JsonLd from '@/components/shared/JsonLd';
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
@@ -21,13 +22,29 @@ export async function generateMetadata({ params }: ProductPageProps): Promise<Me
   const { slug } = await params as any;
   try {
     const product = await getProductBySlug(slug, 'az');
-    const title =
-      'az' === 'az' ? product.title_az || product.title : product.title_en || product.title;
+    const title = product.meta_title_az || product.meta_title ||
+      ('az' === 'az' ? product.title_az || product.title : product.title_en || product.title);
+    const description = product.meta_description_az || product.meta_description || product.short_description || title;
     const img = (product.images?.[0] as any)?.url;
+    const canonicalUrl = `https://4wd.az/products/${slug}`;
     return {
       title,
-      description: product.short_description ?? title,
-      openGraph: { title, images: img ? [img] : [] },
+      description,
+      alternates: { canonical: canonicalUrl },
+      openGraph: {
+        title,
+        description,
+        url: canonicalUrl,
+        type: 'website',
+        siteName: '4WD.az',
+        images: img ? [img] : [],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: img ? [img] : [],
+      },
     };
   } catch {
     return { title: 'Product' };
@@ -87,8 +104,55 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
   // Transform compatibilities
   const compatibilities = product.compatibilities ?? [];
 
+  const stockAvailability =
+    product.stock_status === 'in_stock'
+      ? 'https://schema.org/InStock'
+      : product.stock_status === 'pre_order'
+        ? 'https://schema.org/PreOrder'
+        : 'https://schema.org/OutOfStock';
+
+  const productImage = product.images?.[0]?.url
+    ? getImageUrl(product.images[0].url) ?? undefined
+    : undefined;
+
+  const breadcrumbItems = [
+    { '@type': 'ListItem' as const, position: 1, name: t.nav.home, item: 'https://4wd.az/' },
+    { '@type': 'ListItem' as const, position: 2, name: t.nav.products, item: 'https://4wd.az/products' },
+    ...(product.category
+      ? [{ '@type': 'ListItem' as const, position: 3, name: categoryName, item: `https://4wd.az/categories/${product.category.slug}` }]
+      : []),
+    { '@type': 'ListItem' as const, position: product.category ? 4 : 3, name: title },
+  ];
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'Product',
+          name: title,
+          description: shortDescription ?? description ?? undefined,
+          image: productImage,
+          sku: product.sku ?? undefined,
+          brand: product.brand
+            ? { '@type': 'Brand', name: product.brand.name }
+            : undefined,
+          offers: {
+            '@type': 'Offer',
+            url: `https://4wd.az/products/${slug}`,
+            priceCurrency: 'AZN',
+            price: product.price,
+            availability: stockAvailability,
+          },
+        }}
+      />
+      <JsonLd
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: breadcrumbItems,
+        }}
+      />
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
         <Link href={`/`} className="hover:text-orange-500 transition-colors">

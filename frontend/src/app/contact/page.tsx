@@ -9,9 +9,18 @@ interface ContactPageProps {
 }
 
 export async function generateMetadata({ params }: ContactPageProps): Promise<Metadata> {
-  
-  const t = getTranslation();
-  return { title: t.contact.title };
+  return {
+    title: 'Əlaqə',
+    description: 'Bizimlə əlaqə saxlayın. 4WD.az - Azərbaycanda offroad aksessuarları və 4x4 avadanlıqları mağazası. Sifariş və məsləhət üçün müraciət edin.',
+    alternates: { canonical: 'https://4wd.az/contact' },
+    openGraph: {
+      title: 'Əlaqə | 4WD.az',
+      description: 'Bizimlə əlaqə saxlayın. Sifariş və məsləhət üçün müraciət edin.',
+      url: 'https://4wd.az/contact',
+      type: 'website',
+      siteName: '4WD.az',
+    },
+  };
 }
 
 export default async function ContactPage({ params }: ContactPageProps) {

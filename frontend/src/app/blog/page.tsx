@@ -14,9 +14,18 @@ interface BlogPageProps {
 }
 
 export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
-  
-  const t = getTranslation();
-  return { title: t.blog.title };
+  return {
+    title: 'Blog',
+    description: 'Offroad dünyası haqqında məqalələr, bələdçilər və yeniliklər. 4x4 avtomobillər, aksessuarlar və tuning haqqında faydalı məlumatlar.',
+    alternates: { canonical: 'https://4wd.az/blog' },
+    openGraph: {
+      title: 'Blog | 4WD.az',
+      description: 'Offroad dünyası haqqında məqalələr, bələdçilər və yeniliklər.',
+      url: 'https://4wd.az/blog',
+      type: 'website',
+      siteName: '4WD.az',
+    },
+  };
 }
 
 export default async function BlogPage({ params, searchParams }: BlogPageProps) {

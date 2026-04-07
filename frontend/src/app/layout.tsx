@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { getTranslation } from '@/lib/getTranslation';
@@ -6,6 +6,7 @@ import { getCategories, getSettings } from '@/lib/api';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import WhatsAppButton from '@/components/layout/WhatsAppButton';
+import JsonLd from '@/components/shared/JsonLd';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -13,14 +14,18 @@ const inter = Inter({
   display: 'swap',
 });
 
+export const viewport: Viewport = {
+  themeColor: '#f97316',
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://4wd.az'),
   title: {
     default: '4WD.az - Offroad Aksessuarları',
     template: '%s | 4WD.az',
   },
   description:
     'Azərbaycanda offroad aksessuarları, avtomobil tuning və 4x4 avadanlıqları üzrə lider mağaza.',
-  keywords: ['offroad', '4wd', 'aksessuarlar', 'tuning', 'azerbaijan'],
   openGraph: {
     title: '4WD.az - Offroad Aksessuarları',
     description: 'Azərbaycanda offroad aksessuarları, avtomobil tuning və 4x4 avadanlıqları.',
@@ -64,6 +69,33 @@ export default async function RootLayout({
   return (
     <html lang="az" className={inter.variable}>
       <body className="min-h-screen flex flex-col antialiased">
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: '4WD.az',
+            url: 'https://4wd.az',
+            logo: 'https://4wd.az/logo.png',
+            sameAs: [
+              sett?.facebook_url,
+              sett?.instagram_url,
+              sett?.youtube_url,
+            ].filter(Boolean),
+          }}
+        />
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: '4WD.az',
+            url: 'https://4wd.az',
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: 'https://4wd.az/products?search={search_term}',
+              'query-input': 'required name=search_term',
+            },
+          }}
+        />
         <Header locale={locale} categories={cats} settings={sett} />
         <main className="flex-1">{children}</main>
         <Footer locale={locale} t={t} categories={cats} settings={sett} />

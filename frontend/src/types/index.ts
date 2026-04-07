@@ -30,6 +30,8 @@ export interface Category {
   description_az: string | null;
   description_en: string | null;
   image: string | null;
+  meta_title?: string | null;
+  meta_description?: string | null;
   parent: number | null;
   children?: Category[];
   product_count?: number;
@@ -105,6 +107,10 @@ export interface Product {
   primary_image: string | null;
   images: ProductImage[];
   specifications: ProductSpecification[];
+  meta_title?: string | null;
+  meta_title_az?: string | null;
+  meta_description?: string | null;
+  meta_description_az?: string | null;
   compatible_vehicles: VehicleCompatibility[];
   created_at: string;
   updated_at: string;
@@ -158,6 +164,10 @@ export interface BlogPost {
   content: string;
   content_az: string;
   content_en: string;
+  meta_title?: string | null;
+  meta_title_az?: string | null;
+  meta_description?: string | null;
+  meta_description_az?: string | null;
   featured_image: string | null;
   author: string | null;
   is_published: boolean;
