@@ -26,6 +26,14 @@ export const metadata: Metadata = {
   },
   description:
     'Azərbaycanda offroad aksessuarları, avtomobil tuning və 4x4 avadanlıqları üzrə lider mağaza.',
+  icons: {
+    icon: [
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
+  manifest: '/site.webmanifest',
   openGraph: {
     title: '4WD.az - Offroad Aksessuarları',
     description: 'Azərbaycanda offroad aksessuarları, avtomobil tuning və 4x4 avadanlıqları.',
