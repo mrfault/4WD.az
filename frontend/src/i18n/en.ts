@@ -22,6 +22,7 @@ const en: Translations = {
     accessories: 'Accessories for this model',
     noSpecs: 'No specifications available',
     noProducts: 'No accessories found for this model',
+    present: 'present',
     allBrands: 'All Brands',
   },
   hero: {
