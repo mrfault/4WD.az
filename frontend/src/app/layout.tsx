@@ -83,7 +83,7 @@ export default async function RootLayout({
             '@type': 'Organization',
             name: '4WD.az',
             url: 'https://4wd.az',
-            logo: 'https://4wd.az/logo.png',
+            logo: 'https://4wd.az/logo.svg',
             sameAs: [
               sett?.facebook_url,
               sett?.instagram_url,

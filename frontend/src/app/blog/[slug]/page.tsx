@@ -88,7 +88,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           publisher: {
             '@type': 'Organization',
             name: '4WD.az',
-            logo: { '@type': 'ImageObject', url: 'https://4wd.az/logo.png' },
+            logo: { '@type': 'ImageObject', url: 'https://4wd.az/logo.svg' },
           },
           mainEntityOfPage: `https://4wd.az/blog/${slug}`,
         }}
