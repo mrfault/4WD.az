@@ -45,7 +45,7 @@ export default function ProductCard({ product, t, locale }: ProductCardProps) {
             {imageUrl ? (
               <Image
                 src={imageUrl}
-                alt={title}
+                alt={`${title} - ${locale === 'az' ? product.category.name_az || product.category.name : product.category.name_en || product.category.name} | 4WD.az`}
                 fill
                 className="object-contain transition-transform duration-300 hover:scale-105"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
