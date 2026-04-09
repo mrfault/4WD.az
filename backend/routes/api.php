@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\V1\LeadController;
 use App\Http\Controllers\Api\V1\ProductController;
 use App\Http\Controllers\Api\V1\SearchController;
 use App\Http\Controllers\Api\V1\SettingsController;
+use App\Http\Controllers\Api\V1\CatalogController;
 use App\Http\Controllers\Api\V1\VehicleController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,4 +42,11 @@ Route::prefix('v1')->group(function () {
 
     // Search
     Route::get('/search', [SearchController::class, 'search']);
+
+    // Catalog
+    Route::get('/catalog/brands', [CatalogController::class, 'brands']);
+    Route::get('/catalog/{brandSlug}/{modelSlug}/{genSlug}/products', [CatalogController::class, 'generationProducts']);
+    Route::get('/catalog/{brandSlug}/{modelSlug}/{genSlug}', [CatalogController::class, 'generationDetail']);
+    Route::get('/catalog/{brandSlug}/{modelSlug}', [CatalogController::class, 'generations']);
+    Route::get('/catalog/{brandSlug}', [CatalogController::class, 'models']);
 });

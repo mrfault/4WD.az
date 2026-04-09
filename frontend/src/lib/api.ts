@@ -13,6 +13,10 @@ import type {
   Settings,
   FilterParams,
   Locale,
+  CatalogBrand,
+  CatalogModel,
+  CatalogGeneration,
+  CatalogGenerationDetail,
 } from '@/types';
 
 async function fetchRaw<T>(path: string, locale: Locale, init?: RequestInit): Promise<T> {
@@ -201,4 +205,40 @@ export async function getVehicleModels(
 
 export async function getSettings(locale: Locale): Promise<Settings> {
   return fetcher<Settings>('/settings/', locale);
+}
+
+// ─── Catalog ─────────────────────────────────────────────────────────────────
+
+export async function getCatalogBrands(locale: Locale): Promise<CatalogBrand[]> {
+  return fetcher<CatalogBrand[]>('/catalog/brands', locale);
+}
+
+export async function getCatalogModels(brandSlug: string, locale: Locale): Promise<CatalogModel[]> {
+  return fetcher<CatalogModel[]>(`/catalog/${brandSlug}`, locale);
+}
+
+export async function getCatalogGenerations(
+  brandSlug: string,
+  modelSlug: string,
+  locale: Locale
+): Promise<CatalogGeneration[]> {
+  return fetcher<CatalogGeneration[]>(`/catalog/${brandSlug}/${modelSlug}`, locale);
+}
+
+export async function getCatalogGeneration(
+  brandSlug: string,
+  modelSlug: string,
+  genSlug: string,
+  locale: Locale
+): Promise<CatalogGenerationDetail> {
+  return fetcher<CatalogGenerationDetail>(`/catalog/${brandSlug}/${modelSlug}/${genSlug}`, locale);
+}
+
+export async function getCatalogGenerationProducts(
+  brandSlug: string,
+  modelSlug: string,
+  genSlug: string,
+  locale: Locale
+): Promise<ProductList[]> {
+  return fetcher<ProductList[]>(`/catalog/${brandSlug}/${modelSlug}/${genSlug}/products`, locale);
 }

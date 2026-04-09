@@ -218,6 +218,60 @@ export interface Settings {
   whatsapp_number: string | null;
 }
 
+// ─── Catalog ─────────────────────────────────────────────────────────────────
+
+export interface CatalogBrand {
+  id: number;
+  name: string;
+  slug: string;
+  logo: string | null;
+  country: string | null;
+  models_count: number;
+}
+
+export interface CatalogModel {
+  id: number;
+  name: string;
+  slug: string;
+  body_type: string | null;
+  image: string | null;
+  brand: {
+    name: string;
+    slug: string;
+  };
+  generations_count: number;
+}
+
+export interface CatalogGeneration {
+  id: number;
+  name: string;
+  slug: string;
+  year_from: number | null;
+  year_to: number | null;
+  image: string | null;
+}
+
+export interface CatalogSpec {
+  key: string;
+  value: string;
+}
+
+export interface CatalogImage {
+  image: string;
+  alt_text: string | null;
+}
+
+export interface CatalogGenerationDetail {
+  id: number;
+  name: string;
+  slug: string;
+  year_from: number | null;
+  year_to: number | null;
+  image: string | null;
+  specs: Record<string, CatalogSpec[]>;
+  images: CatalogImage[];
+}
+
 // ─── UI helpers ───────────────────────────────────────────────────────────────
 
 export type Locale = 'az';
