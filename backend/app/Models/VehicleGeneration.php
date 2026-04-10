@@ -5,39 +5,39 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class CatalogModel extends Model
+class VehicleGeneration extends Model
 {
     protected $fillable = [
-        'catalog_brand_id',
+        'vehicle_model_id',
         'name',
         'slug',
-        'body_type',
+        'year_from',
+        'year_to',
         'image',
+        'gallery',
         'is_active',
         'sort_order',
     ];
 
     protected $casts = [
-        'catalog_brand_id' => 'integer',
+        'vehicle_model_id' => 'integer',
+        'year_from' => 'integer',
+        'year_to' => 'integer',
+        'gallery' => 'array',
         'is_active' => 'boolean',
         'sort_order' => 'integer',
     ];
 
-    public function catalogBrand(): BelongsTo
+    public function vehicleModel(): BelongsTo
     {
-        return $this->belongsTo(CatalogBrand::class);
+        return $this->belongsTo(VehicleModel::class);
     }
 
-    public function catalogGenerations(): HasMany
+    public function spec(): HasOne
     {
-        return $this->hasMany(CatalogGeneration::class);
-    }
-
-    public function getGenerationsCountAttribute(): int
-    {
-        return $this->catalogGenerations()->where('is_active', true)->count();
+        return $this->hasOne(VehicleGenerationSpec::class);
     }
 
     public function scopeActive(Builder $query): Builder

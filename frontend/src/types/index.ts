@@ -56,6 +56,53 @@ export interface VehicleModel {
   year_to: number | null;
 }
 
+export interface CatalogGeneration {
+  id: number;
+  name: string;
+  slug: string;
+  year_from: number;
+  year_to: number | null;
+  image: string | null;
+}
+
+export interface CatalogModel {
+  id: number;
+  name: string;
+  slug: string;
+  generations: CatalogGeneration[];
+}
+
+export interface CatalogBrand {
+  id: number;
+  name: string;
+  slug: string;
+  logo: string | null;
+}
+
+export interface CatalogSpecItem {
+  key: string;
+  value: string;
+}
+
+export interface CatalogSpecGroup {
+  label: string;
+  sort_order: number;
+  items: CatalogSpecItem[];
+}
+
+export interface CatalogGenerationDetail {
+  id: number;
+  name: string;
+  slug: string;
+  year_from: number;
+  year_to: number | null;
+  image: string | null;
+  gallery: string[];
+  specs: CatalogSpecGroup[];
+  model: { name: string; slug: string };
+  brand: { name: string; slug: string; logo: string | null };
+}
+
 export interface VehicleCompatibility {
   brand: VehicleBrand;
   models: VehicleModel[];
@@ -216,60 +263,6 @@ export interface Settings {
   youtube_url: string | null;
   tiktok_url: string | null;
   whatsapp_number: string | null;
-}
-
-// ─── Catalog ─────────────────────────────────────────────────────────────────
-
-export interface CatalogBrand {
-  id: number;
-  name: string;
-  slug: string;
-  logo: string | null;
-  country: string | null;
-  models_count: number;
-}
-
-export interface CatalogModel {
-  id: number;
-  name: string;
-  slug: string;
-  body_type: string | null;
-  image: string | null;
-  brand: {
-    name: string;
-    slug: string;
-  };
-  generations_count: number;
-}
-
-export interface CatalogGeneration {
-  id: number;
-  name: string;
-  slug: string;
-  year_from: number | null;
-  year_to: number | null;
-  image: string | null;
-}
-
-export interface CatalogSpec {
-  key: string;
-  value: string;
-}
-
-export interface CatalogImage {
-  image: string;
-  alt_text: string | null;
-}
-
-export interface CatalogGenerationDetail {
-  id: number;
-  name: string;
-  slug: string;
-  year_from: number | null;
-  year_to: number | null;
-  image: string | null;
-  specs: Record<string, CatalogSpec[]>;
-  images: CatalogImage[];
 }
 
 // ─── UI helpers ───────────────────────────────────────────────────────────────

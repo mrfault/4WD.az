@@ -31,6 +31,7 @@ export default function Header({ locale, categories = [], settings }: HeaderProp
   const navItems = [
     { label: t.nav.home, href: `/` },
     { label: t.nav.products, href: `/products` },
+    { label: t.nav.catalog, href: `/4x4-catalog` },
     { label: t.nav.gallery, href: `/gallery` },
     { label: t.nav.blog, href: `/blog` },
     { label: t.nav.contact, href: `/contact` },

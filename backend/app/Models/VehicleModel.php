@@ -30,6 +30,11 @@ class VehicleModel extends Model
         return $this->belongsTo(VehicleBrand::class);
     }
 
+    public function generations(): HasMany
+    {
+        return $this->hasMany(VehicleGeneration::class);
+    }
+
     public function productCompatibilities(): HasMany
     {
         return $this->hasMany(ProductCompatibility::class);

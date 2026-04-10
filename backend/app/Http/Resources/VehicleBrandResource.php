@@ -13,7 +13,7 @@ class VehicleBrandResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'logo' => $this->logo,
+            'logo' => $this->logo ? asset('storage/' . $this->logo) : null,
             'models_count' => $this->whenCounted('vehicleModels'),
         ];
     }
