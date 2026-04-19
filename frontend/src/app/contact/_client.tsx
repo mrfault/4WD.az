@@ -32,7 +32,7 @@ export default function ContactPageClient({ t, locale, settings }: ContactPageCl
     const newErrors: FormErrors = {};
     if (!form.phone.trim()) {
       newErrors.phone = t.lead.phoneRequired;
-    } else if (!/^\+?[0-9\s\-()]{7,20}$/.test(form.phone)) {
+    } else if (!/^[0-9]{9}$/.test(form.phone.replace(/\s/g, ''))) {
       newErrors.phone = t.lead.phoneHint;
     }
     setErrors(newErrors);
@@ -46,7 +46,7 @@ export default function ContactPageClient({ t, locale, settings }: ContactPageCl
     try {
       const payload: LeadFormData = {
         customer_name: form.name.trim() || undefined,
-        phone: form.phone.trim(),
+        phone: `+994${form.phone.replace(/\s/g, '')}`,
         message: form.message.trim() || undefined,
         source: 'contact',
       };
@@ -121,17 +121,21 @@ export default function ContactPageClient({ t, locale, settings }: ContactPageCl
                 <label className="block text-sm font-medium text-gray-700 mb-1.5">
                   {t.lead.phone} <span className="text-red-500">*</span>
                 </label>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <div className="relative flex">
+                  <span className="inline-flex items-center gap-1.5 px-3 rounded-l-xl border border-r-0 border-gray-300 bg-gray-50 text-gray-600 text-sm font-medium select-none">
+                    <Phone className="w-4 h-4 text-gray-400" />
+                    +994
+                  </span>
                   <input
                     type="tel"
-                    placeholder={t.lead.phonePlaceholder}
+                    placeholder="50 000 00 00"
                     value={form.phone}
                     onChange={(e) => {
-                      setForm((f) => ({ ...f, phone: e.target.value }));
+                      const val = e.target.value.replace(/[^0-9\s]/g, '');
+                      setForm((f) => ({ ...f, phone: val }));
                       if (errors.phone) setErrors({});
                     }}
-                    className={`w-full pl-10 pr-4 py-3 rounded-xl border text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors ${
+                    className={`w-full px-4 py-3 rounded-r-xl border text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors ${
                       errors.phone ? 'border-red-400' : 'border-gray-300'
                     }`}
                   />
@@ -326,13 +330,18 @@ export default function ContactPageClient({ t, locale, settings }: ContactPageCl
             </a>
           )}
 
-          {/* Map placeholder */}
-          <div className="rounded-2xl overflow-hidden border border-gray-100 h-64 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-            <div className="text-center text-gray-500">
-              <MapPin className="w-10 h-10 mx-auto mb-2 text-gray-400" />
-              <p className="text-sm font-medium">{t.contact.mapTitle}</p>
-              {address && <p className="text-xs mt-1 text-gray-400">{address}</p>}
-            </div>
+          {/* Map */}
+          <div className="rounded-2xl overflow-hidden border border-gray-100 h-64">
+            <iframe
+              src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(address || 'Baku, Azerbaijan')}&zoom=15`}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title={t.contact.mapTitle}
+            />
           </div>
         </div>
       </div>

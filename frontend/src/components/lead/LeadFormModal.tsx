@@ -46,9 +46,10 @@ export default function LeadFormModal({
 
   function validate(): boolean {
     const newErrors: FormErrors = {};
-    if (!form.phone.trim()) {
+    const digits = form.phone.replace(/\s/g, '');
+    if (!digits) {
       newErrors.phone = t.lead.phoneRequired;
-    } else if (!/^\+?[0-9\s\-()]{7,20}$/.test(form.phone)) {
+    } else if (!/^[0-9]{9}$/.test(digits)) {
       newErrors.phone = t.lead.phoneHint;
     }
     setErrors(newErrors);
@@ -62,7 +63,7 @@ export default function LeadFormModal({
     try {
       const payload: LeadFormData = {
         customer_name: form.name.trim() || undefined,
-        phone: form.phone.trim(),
+        phone: `+994${form.phone.replace(/\s/g, '')}`,
         message: form.message.trim() || undefined,
         source,
         product_id: productId,
@@ -166,6 +167,13 @@ export default function LeadFormModal({
                         onSubmit={handleSubmit}
                         className="space-y-4"
                       >
+                        {source === 'product' && (
+                          <div className="bg-orange-50 border border-orange-200 rounded-xl px-4 py-3 -mt-1 mb-1">
+                            <p className="text-sm text-orange-700 font-medium">
+                              Əlaqə vasitənizi daxil edin, əməkdaşımız ən qısa zamanda geri dönüş edəcək.
+                            </p>
+                          </div>
+                        )}
                         {/* Name */}
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -186,17 +194,21 @@ export default function LeadFormModal({
                             {t.lead.phone}{' '}
                             <span className="text-red-500">*</span>
                           </label>
-                          <div className="relative">
-                            <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                          <div className="relative flex">
+                            <span className="inline-flex items-center gap-1.5 px-3 rounded-l-xl border border-r-0 border-gray-300 bg-gray-50 text-gray-600 text-sm font-medium select-none">
+                              <Phone className="w-4 h-4 text-gray-400" />
+                              +994
+                            </span>
                             <input
                               type="tel"
-                              placeholder={t.lead.phonePlaceholder}
+                              placeholder="50 000 00 00"
                               value={form.phone}
                               onChange={(e) => {
-                                setForm((f) => ({ ...f, phone: e.target.value }));
+                                const val = e.target.value.replace(/[^0-9\s]/g, '');
+                                setForm((f) => ({ ...f, phone: val }));
                                 if (errors.phone) setErrors((err) => ({ ...err, phone: undefined }));
                               }}
-                              className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors ${errors.phone ? 'border-red-400' : 'border-gray-300'}`}
+                              className={`w-full px-4 py-2.5 rounded-r-xl border text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-colors ${errors.phone ? 'border-red-400' : 'border-gray-300'}`}
                             />
                           </div>
                           {errors.phone && (

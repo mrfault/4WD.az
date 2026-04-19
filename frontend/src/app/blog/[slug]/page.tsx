@@ -8,6 +8,7 @@ import { getTranslation } from '@/lib/getTranslation';
 import { getBlogPostBySlug } from '@/lib/api';
 import { getImageUrl, formatDate } from '@/lib/utils';
 import JsonLd from '@/components/shared/JsonLd';
+import ViewTracker from '@/components/shared/ViewTracker';
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -74,6 +75,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <article>
+      <ViewTracker slug={slug} type="blog" />
       <JsonLd
         data={{
           '@context': 'https://schema.org',

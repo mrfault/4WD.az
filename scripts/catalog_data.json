@@ -1,0 +1,752 @@
+[
+  {
+    "brand_slug": "toyota",
+    "models": [
+      {
+        "name": "Land Cruiser",
+        "slug": "land-cruiser",
+        "autoru_slug": "land_cruiser",
+        "generations": []
+      },
+      {
+        "name": "Land Cruiser Prado",
+        "slug": "land-cruiser-prado",
+        "autoru_slug": "land_cruiser_prado",
+        "generations": []
+      },
+      {
+        "name": "Hilux",
+        "slug": "hilux",
+        "autoru_slug": "hilux",
+        "generations": []
+      },
+      {
+        "name": "4Runner",
+        "slug": "4runner",
+        "autoru_slug": "4runner",
+        "generations": []
+      },
+      {
+        "name": "FJ Cruiser",
+        "slug": "fj-cruiser",
+        "autoru_slug": "fj_cruiser",
+        "generations": []
+      },
+      {
+        "name": "Tacoma",
+        "slug": "tacoma",
+        "autoru_slug": "tacoma",
+        "generations": []
+      },
+      {
+        "name": "Tundra",
+        "slug": "tundra",
+        "autoru_slug": "tundra",
+        "generations": []
+      },
+      {
+        "name": "Fortuner",
+        "slug": "fortuner",
+        "autoru_slug": "fortuner",
+        "generations": []
+      },
+      {
+        "name": "Sequoia",
+        "slug": "sequoia",
+        "autoru_slug": "sequoia",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "nissan",
+    "models": [
+      {
+        "name": "Patrol",
+        "slug": "patrol",
+        "autoru_slug": "patrol",
+        "generations": []
+      },
+      {
+        "name": "Navara",
+        "slug": "navara",
+        "autoru_slug": "navara",
+        "generations": []
+      },
+      {
+        "name": "Pathfinder",
+        "slug": "pathfinder",
+        "autoru_slug": "pathfinder",
+        "generations": []
+      },
+      {
+        "name": "X-Terra",
+        "slug": "x-terra",
+        "autoru_slug": "x_terra",
+        "generations": []
+      },
+      {
+        "name": "X-Trail",
+        "slug": "x-trail",
+        "autoru_slug": "x_trail",
+        "generations": []
+      },
+      {
+        "name": "Terrano",
+        "slug": "terrano",
+        "autoru_slug": "terrano",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "mitsubishi",
+    "models": [
+      {
+        "name": "Pajero",
+        "slug": "pajero",
+        "autoru_slug": "pajero",
+        "generations": []
+      },
+      {
+        "name": "Pajero Sport",
+        "slug": "pajero-sport",
+        "autoru_slug": "pajero_sport",
+        "generations": []
+      },
+      {
+        "name": "L200",
+        "slug": "l200",
+        "autoru_slug": "l200",
+        "generations": []
+      },
+      {
+        "name": "Outlander",
+        "slug": "outlander",
+        "autoru_slug": "outlander",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "jeep",
+    "models": [
+      {
+        "name": "Wrangler",
+        "slug": "wrangler",
+        "autoru_slug": "wrangler",
+        "generations": []
+      },
+      {
+        "name": "Gladiator",
+        "slug": "gladiator",
+        "autoru_slug": "gladiator",
+        "generations": []
+      },
+      {
+        "name": "Grand Cherokee",
+        "slug": "grand-cherokee",
+        "autoru_slug": "grand_cherokee",
+        "generations": []
+      },
+      {
+        "name": "Cherokee",
+        "slug": "cherokee",
+        "autoru_slug": "cherokee",
+        "generations": []
+      },
+      {
+        "name": "Commander",
+        "slug": "commander",
+        "autoru_slug": "commander",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "land-rover",
+    "models": [
+      {
+        "name": "Defender",
+        "slug": "defender",
+        "autoru_slug": "defender",
+        "generations": []
+      },
+      {
+        "name": "Discovery",
+        "slug": "discovery",
+        "autoru_slug": "discovery",
+        "generations": []
+      },
+      {
+        "name": "Discovery Sport",
+        "slug": "discovery-sport",
+        "autoru_slug": "discovery_sport",
+        "generations": []
+      },
+      {
+        "name": "Range Rover",
+        "slug": "range-rover",
+        "autoru_slug": "range_rover",
+        "generations": []
+      },
+      {
+        "name": "Range Rover Sport",
+        "slug": "range-rover-sport",
+        "autoru_slug": "range_rover_sport",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "suzuki",
+    "models": [
+      {
+        "name": "Jimny",
+        "slug": "jimny",
+        "autoru_slug": "jimny",
+        "generations": []
+      },
+      {
+        "name": "Grand Vitara",
+        "slug": "grand-vitara",
+        "autoru_slug": "grand_vitara",
+        "generations": []
+      },
+      {
+        "name": "Vitara",
+        "slug": "vitara",
+        "autoru_slug": "vitara",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "ford",
+    "models": [
+      {
+        "name": "Bronco",
+        "slug": "bronco",
+        "autoru_slug": "bronco",
+        "generations": []
+      },
+      {
+        "name": "Ranger",
+        "slug": "ranger",
+        "autoru_slug": "ranger",
+        "generations": []
+      },
+      {
+        "name": "F-150",
+        "slug": "f-150",
+        "autoru_slug": "f_150",
+        "generations": []
+      },
+      {
+        "name": "Everest",
+        "slug": "everest",
+        "autoru_slug": "everest",
+        "generations": []
+      },
+      {
+        "name": "Explorer",
+        "slug": "explorer",
+        "autoru_slug": "explorer",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "chevrolet",
+    "models": [
+      {
+        "name": "Tahoe",
+        "slug": "tahoe",
+        "autoru_slug": "tahoe",
+        "generations": []
+      },
+      {
+        "name": "Silverado",
+        "slug": "silverado",
+        "autoru_slug": "silverado",
+        "generations": []
+      },
+      {
+        "name": "Colorado",
+        "slug": "colorado",
+        "autoru_slug": "colorado",
+        "generations": []
+      },
+      {
+        "name": "TrailBlazer",
+        "slug": "trailblazer",
+        "autoru_slug": "trailblazer",
+        "generations": []
+      },
+      {
+        "name": "Suburban",
+        "slug": "suburban",
+        "autoru_slug": "suburban",
+        "generations": []
+      },
+      {
+        "name": "Niva",
+        "slug": "niva",
+        "autoru_slug": "niva",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "dodge",
+    "models": [
+      {
+        "name": "Ram",
+        "slug": "ram",
+        "autoru_slug": "ram",
+        "generations": []
+      },
+      {
+        "name": "Durango",
+        "slug": "durango",
+        "autoru_slug": "durango",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "gmc",
+    "models": [
+      {
+        "name": "Sierra",
+        "slug": "sierra",
+        "autoru_slug": "sierra",
+        "generations": []
+      },
+      {
+        "name": "Yukon",
+        "slug": "yukon",
+        "autoru_slug": "yukon",
+        "generations": []
+      },
+      {
+        "name": "Canyon",
+        "slug": "canyon",
+        "autoru_slug": "canyon",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "mercedes-benz",
+    "models": [
+      {
+        "name": "G-Class",
+        "slug": "g-class",
+        "autoru_slug": "g_klasse",
+        "generations": []
+      },
+      {
+        "name": "GLE",
+        "slug": "gle",
+        "autoru_slug": "gle_klasse",
+        "generations": []
+      },
+      {
+        "name": "GLS",
+        "slug": "gls",
+        "autoru_slug": "gls_klasse",
+        "generations": []
+      },
+      {
+        "name": "GL",
+        "slug": "gl",
+        "autoru_slug": "gl_klasse",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "bmw",
+    "models": [
+      {
+        "name": "X3",
+        "slug": "x3",
+        "autoru_slug": "x3",
+        "generations": []
+      },
+      {
+        "name": "X5",
+        "slug": "x5",
+        "autoru_slug": "x5",
+        "generations": []
+      },
+      {
+        "name": "X7",
+        "slug": "x7",
+        "autoru_slug": "x7",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "volkswagen",
+    "models": [
+      {
+        "name": "Touareg",
+        "slug": "touareg",
+        "autoru_slug": "touareg",
+        "generations": []
+      },
+      {
+        "name": "Amarok",
+        "slug": "amarok",
+        "autoru_slug": "amarok",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "isuzu",
+    "models": [
+      {
+        "name": "D-Max",
+        "slug": "d-max",
+        "autoru_slug": "d_max",
+        "generations": []
+      },
+      {
+        "name": "MU-X",
+        "slug": "mu-x",
+        "autoru_slug": "mu_x",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "mazda",
+    "models": [
+      {
+        "name": "CX-5",
+        "slug": "cx-5",
+        "autoru_slug": "cx_5",
+        "generations": []
+      },
+      {
+        "name": "CX-9",
+        "slug": "cx-9",
+        "autoru_slug": "cx_9",
+        "generations": []
+      },
+      {
+        "name": "BT-50",
+        "slug": "bt-50",
+        "autoru_slug": "bt_50",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "subaru",
+    "models": [
+      {
+        "name": "Forester",
+        "slug": "forester",
+        "autoru_slug": "forester",
+        "generations": []
+      },
+      {
+        "name": "Outback",
+        "slug": "outback",
+        "autoru_slug": "outback",
+        "generations": []
+      },
+      {
+        "name": "XV",
+        "slug": "xv",
+        "autoru_slug": "xv",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "lexus",
+    "models": [
+      {
+        "name": "LX",
+        "slug": "lx",
+        "autoru_slug": "lx",
+        "generations": []
+      },
+      {
+        "name": "GX",
+        "slug": "gx",
+        "autoru_slug": "gx",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "infiniti",
+    "models": [
+      {
+        "name": "QX80",
+        "slug": "qx80",
+        "autoru_slug": "qx80",
+        "generations": []
+      },
+      {
+        "name": "QX60",
+        "slug": "qx60",
+        "autoru_slug": "qx60",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "hyundai",
+    "models": [
+      {
+        "name": "Santa Fe",
+        "slug": "santa-fe",
+        "autoru_slug": "santa_fe",
+        "generations": []
+      },
+      {
+        "name": "Tucson",
+        "slug": "tucson",
+        "autoru_slug": "tucson",
+        "generations": []
+      },
+      {
+        "name": "Palisade",
+        "slug": "palisade",
+        "autoru_slug": "palisade",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "kia",
+    "models": [
+      {
+        "name": "Sorento",
+        "slug": "sorento",
+        "autoru_slug": "sorento",
+        "generations": []
+      },
+      {
+        "name": "Sportage",
+        "slug": "sportage",
+        "autoru_slug": "sportage",
+        "generations": []
+      },
+      {
+        "name": "Mohave",
+        "slug": "mohave",
+        "autoru_slug": "mohave",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "ssangyong",
+    "models": [
+      {
+        "name": "Rexton",
+        "slug": "rexton",
+        "autoru_slug": "rexton",
+        "generations": []
+      },
+      {
+        "name": "Musso",
+        "slug": "musso",
+        "autoru_slug": "musso",
+        "generations": []
+      },
+      {
+        "name": "Kyron",
+        "slug": "kyron",
+        "autoru_slug": "kyron",
+        "generations": []
+      },
+      {
+        "name": "Korando",
+        "slug": "korando",
+        "autoru_slug": "korando",
+        "generations": []
+      },
+      {
+        "name": "Actyon Sports",
+        "slug": "actyon-sports",
+        "autoru_slug": "actyon_sports",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "great-wall",
+    "models": [
+      {
+        "name": "Wingle",
+        "slug": "wingle",
+        "autoru_slug": "wingle",
+        "generations": []
+      },
+      {
+        "name": "Hover",
+        "slug": "hover",
+        "autoru_slug": "hover",
+        "generations": []
+      },
+      {
+        "name": "Poer",
+        "slug": "poer",
+        "autoru_slug": "poer",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "mahindra",
+    "models": [
+      {
+        "name": "Thar",
+        "slug": "thar",
+        "autoru_slug": "thar",
+        "generations": []
+      },
+      {
+        "name": "Scorpio",
+        "slug": "scorpio",
+        "autoru_slug": "scorpio",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "lada",
+    "models": [
+      {
+        "name": "Niva",
+        "slug": "niva",
+        "autoru_slug": "4x4",
+        "generations": []
+      },
+      {
+        "name": "Niva Travel",
+        "slug": "niva-travel",
+        "autoru_slug": "niva_travel",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "hummer",
+    "models": [
+      {
+        "name": "H1",
+        "slug": "h1",
+        "autoru_slug": "h1",
+        "generations": []
+      },
+      {
+        "name": "H2",
+        "slug": "h2",
+        "autoru_slug": "h2",
+        "generations": []
+      },
+      {
+        "name": "H3",
+        "slug": "h3",
+        "autoru_slug": "h3",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "uaz",
+    "models": [
+      {
+        "name": "Patriot",
+        "slug": "patriot",
+        "autoru_slug": "patriot",
+        "generations": []
+      },
+      {
+        "name": "Hunter",
+        "slug": "hunter",
+        "autoru_slug": "hunter",
+        "generations": []
+      },
+      {
+        "name": "3151",
+        "slug": "3151",
+        "autoru_slug": "3151",
+        "generations": []
+      },
+      {
+        "name": "Pickup",
+        "slug": "pickup",
+        "autoru_slug": "pickup",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "byd",
+    "models": [
+      {
+        "name": "Tang",
+        "slug": "tang",
+        "autoru_slug": "tang",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "rivian",
+    "models": [
+      {
+        "name": "R1T",
+        "slug": "r1t",
+        "autoru_slug": "r1t",
+        "generations": []
+      },
+      {
+        "name": "R1S",
+        "slug": "r1s",
+        "autoru_slug": "r1s",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "tesla",
+    "models": [
+      {
+        "name": "Model X",
+        "slug": "model-x",
+        "autoru_slug": "model_x",
+        "generations": []
+      },
+      {
+        "name": "Cybertruck",
+        "slug": "cybertruck",
+        "autoru_slug": "cybertruck",
+        "generations": []
+      }
+    ]
+  },
+  {
+    "brand_slug": "tata",
+    "models": [
+      {
+        "name": "Safari",
+        "slug": "safari",
+        "autoru_slug": "safari",
+        "generations": []
+      }
+    ]
+  }
+]
