@@ -7,6 +7,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import WhatsAppButton from '@/components/layout/WhatsAppButton';
 import JsonLd from '@/components/shared/JsonLd';
+import GoogleAnalytics from '@/components/shared/GoogleAnalytics';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -77,6 +78,7 @@ export default async function RootLayout({
   return (
     <html lang="az" className={inter.variable}>
       <body className="min-h-screen flex flex-col antialiased">
+        <GoogleAnalytics />
         <JsonLd
           data={{
             '@context': 'https://schema.org',
