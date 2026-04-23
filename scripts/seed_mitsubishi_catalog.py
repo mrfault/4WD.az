@@ -25,64 +25,64 @@ DB_CONFIG = {
 # TRANSLATIONS RU -> AZ
 # ============================================================
 GROUP_TR = {
-    "Общая информация": "Umumi melumat",
-    "Размеры": "Olculer",
-    "Объём и масса": "Hecm ve kutle",
-    "Двигатель": "Muherrik",
+    "Общая информация": "Ümumi məlumat",
+    "Размеры": "Ölçülər",
+    "Объём и масса": "Həcm və kütlə",
+    "Двигатель": "Mühərrik",
     "Трансмиссия": "Transmissiya",
     "Эксплуатационные показатели": "Performans",
-    "Подвеска и тормоза": "Asqi ve eylecler",
+    "Подвеска и тормоза": "Asqı və əyləclər",
 }
 
 KEY_TR = {
-    "Страна марки": "Olke",
+    "Страна марки": "Ölkə",
     "Класс автомобиля": "Avtomobil sinfi",
-    "Количество дверей": "Qapi sayi",
-    "Количество мест": "Oturacaq sayi",
-    "Расположение руля": "Sukan movqeyi",
+    "Количество дверей": "Qapı sayı",
+    "Количество мест": "Oturacaq sayı",
+    "Расположение руля": "Sükan mövqeyi",
     "Длина": "Uzunluq",
     "Ширина": "En",
-    "Высота": "Hundurluq",
-    "Колёсная база": "Teker bazasi",
+    "Высота": "Hündürlük",
+    "Колёсная база": "Təkər bazası",
     "Клиренс": "Klirens",
-    "Ширина передней колеи": "On teker izi",
-    "Ширина задней колеи": "Arxa teker izi",
-    "Размер колёс": "Teker olcusu",
-    "Объём багажника": "Baqaj hecmi",
-    "Объём топливного бака": "Yanacaq ceni",
-    "Снаряженная масса": "Oz kutlesi",
-    "Полная масса": "Tam kutle",
-    "Тип двигателя": "Muherrik tipi",
-    "Расположение двигателя": "Muherrik yeri",
-    "Объём двигателя": "Muherrik hecmi",
+    "Ширина передней колеи": "Ön təkər izi",
+    "Ширина задней колеи": "Arxa təkər izi",
+    "Размер колёс": "Təkər ölçüsü",
+    "Объём багажника": "Baqaj həcmi",
+    "Объём топливного бака": "Yanacaq çəni",
+    "Снаряженная масса": "Öz kütləsi",
+    "Полная масса": "Tam kütlə",
+    "Тип двигателя": "Mühərrik tipi",
+    "Расположение двигателя": "Mühərrik yeri",
+    "Объём двигателя": "Mühərrik həcmi",
     "Наддув": "Nasos",
-    "Максимальная мощность": "Maksimum guc",
-    "Максимальный крутящий момент": "Maks. firlanma momenti",
+    "Максимальная мощность": "Maksimum güc",
+    "Максимальный крутящий момент": "Maks. fırlanma momenti",
     "Конфигурация": "Konfiqurasiya",
-    "Количество цилиндров": "Silindr sayi",
+    "Количество цилиндров": "Silindr sayı",
     "Количество клапанов на цилиндр": "Silindrə klapan",
     "Система питания": "Yanacaq sistemi",
-    "Степень сжатия": "Sixilma derecesi",
-    "Диаметр цилиндра и ход поршня": "Silindr diametri / porsen gedisi",
-    "Код двигателя": "Muherrik kodu",
+    "Степень сжатия": "Sıxılma dərəcəsi",
+    "Диаметр цилиндра и ход поршня": "Silindr diametri / porşen gedişi",
+    "Код двигателя": "Mühərrik kodu",
     "ГРМ": "Qaz paylama mexanizmi",
-    "Коробка передач": "Suretler qutusu",
-    "Количество передач": "Suret sayi",
-    "Тип привода": "Oturucu tipi",
-    "Максимальная скорость": "Maks. suret",
+    "Коробка передач": "Sürətlər qutusu",
+    "Количество передач": "Sürət sayı",
+    "Тип привода": "Ötürücü tipi",
+    "Максимальная скорость": "Maks. sürət",
     "Разгон до 100 км/ч": "0-100 km/s",
-    "Расход топлива": "Yanacaq serfiyyati",
-    "Марка топлива": "Yanacaq markasi",
-    "Тип передней подвески": "On asqi",
-    "Тип задней подвески": "Arxa asqi",
-    "Передние тормоза": "On eylecler",
-    "Задние тормоза": "Arxa eylecler",
+    "Расход топлива": "Yanacaq sərfiyyatı",
+    "Марка топлива": "Yanacaq markası",
+    "Тип передней подвески": "Ön asqı",
+    "Тип задней подвески": "Arxa asqı",
+    "Передние тормоза": "Ön əyləclər",
+    "Задние тормоза": "Arxa əyləclər",
     "Экологический стандарт": "Ekoloji standart",
-    "Выброс CO2": "CO2 emissiyasi",
+    "Выброс CO2": "CO2 emissiyası",
     # Value translations
     "Левый": "Sol",
-    "Правый": "Sag",
-    "Левый, Правый": "Sol, Sag",
+    "Правый": "Sağ",
+    "Левый, Правый": "Sol, Sağ",
     "Бензин": "Benzin",
     "Бензиновый": "Benzin",
     "Дизель": "Dizel",
@@ -93,29 +93,29 @@ KEY_TR = {
     "Механика": "Mexaniki",
     "Вариатор": "Variator",
     "Полный": "Tam",
-    "Передний": "On",
+    "Передний": "Ön",
     "Задний": "Arxa",
-    "Независимая, пружинная": "Musteqil, yayli",
-    "Зависимая, рессорная": "Asili, ressorlu",
-    "Зависимая, пружинная": "Asili, yayli",
-    "Зависимая, листовая": "Asili, yarpaq ressorlu",
-    "Независимая, торсионная": "Musteqil, torsion",
-    "Дисковые вентилируемые": "Diskli ventilyasiyali",
+    "Независимая, пружинная": "Müstəqil, yaylı",
+    "Зависимая, рессорная": "Asılı, ressorlu",
+    "Зависимая, пружинная": "Asılı, yaylı",
+    "Зависимая, листовая": "Asılı, yarpaq ressorlu",
+    "Независимая, торсионная": "Müstəqil, torsion",
+    "Дисковые вентилируемые": "Diskli ventilyasiyalı",
     "Дисковые": "Diskli",
     "Барабанные": "Baraban",
     "Япония": "Yaponiya",
     "Нет": "Yox",
     "Турбонаддув": "Turbo",
     "Турбо": "Turbo",
-    "Передний, продольное": "On, uzununa",
-    "Передний, поперечное": "On, enine",
-    "Прямой впрыск": "Birbasa enjeksiyon",
-    "Распределённый впрыск": "Paylanmis enjeksiyon",
-    "Непосредственный впрыск": "Birbasa enjeksiyon",
-    "Непосредственный впрыск (прямой)": "Birbasa enjeksiyon",
+    "Передний, продольное": "Ön, uzununa",
+    "Передний, поперечное": "Ön, eninə",
+    "Прямой впрыск": "Birbaşa enjeksiyon",
+    "Распределённый впрыск": "Paylanmış enjeksiyon",
+    "Непосредственный впрыск": "Birbaşa enjeksiyon",
+    "Непосредственный впрыск (прямой)": "Birbaşa enjeksiyon",
     "Common Rail": "Common Rail",
-    "Рядный": "Sirali",
-    "V-образный": "V-sekilli",
+    "Рядный": "Sıralı",
+    "V-образный": "V-şəkilli",
 }
 
 
@@ -128,6 +128,21 @@ def tr_group(text):
     return GROUP_TR.get(text.strip(), text.strip())
 
 
+_UNIT_REPLACEMENTS = [
+    ("л/100км","l/100km"),("л/100 км","l/100km"),("км/ч","km/saat"),
+    ("об/мин","d/d"),("л.с.","a.g."),("см³","sm³"),("мм","mm"),
+    ("кг","kq"),("Нм","Nm"),("кВт","kVt"),("г/км","q/km"),
+    ("АИ-","AI-"),("Евро ","Avro "),(" при "," @ "),(" л"," l"),
+]
+
+
+def tr_val(text):
+    t = tr(text)
+    for ru, az in _UNIT_REPLACEMENTS:
+        t = t.replace(ru, az)
+    return t
+
+
 def make_specs(raw):
     """Convert raw specs dict -> translated JSON array."""
     result = []
@@ -136,7 +151,7 @@ def make_specs(raw):
         sort += 1
         translated = []
         for key, val in items:
-            translated.append({"key": tr(key), "value": tr(val)})
+            translated.append({"key": tr(key), "value": tr_val(val)})
         result.append({
             "label": tr_group(group_name),
             "sort_order": sort,

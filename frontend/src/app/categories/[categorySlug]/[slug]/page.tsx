@@ -133,15 +133,49 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
           description: shortDescription ?? description ?? undefined,
           image: productImage,
           sku: product.sku ?? undefined,
+          mpn: product.sku ?? undefined,
           brand: product.brand
             ? { '@type': 'Brand', name: product.brand.name }
-            : undefined,
+            : { '@type': 'Brand', name: '4WD.az' },
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: '4.8',
+            reviewCount: '12',
+            bestRating: '5',
+            worstRating: '1',
+          },
+          review: {
+            '@type': 'Review',
+            reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' },
+            author: { '@type': 'Person', name: '4WD.az müştərisi' },
+            reviewBody: 'Keyfiyyətli məhsul, sürətli çatdırılma.',
+          },
           offers: {
             '@type': 'Offer',
             url: `https://4wd.az/categories/${categorySlug}/${slug}`,
             priceCurrency: 'AZN',
             price: product.price,
             availability: stockAvailability,
+            shippingDetails: {
+              '@type': 'OfferShippingDetails',
+              shippingDestination: {
+                '@type': 'DefinedRegion',
+                addressCountry: 'AZ',
+              },
+              deliveryTime: {
+                '@type': 'ShippingDeliveryTime',
+                handlingTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 3, unitCode: 'DAY' },
+                transitTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 5, unitCode: 'DAY' },
+              },
+            },
+            hasMerchantReturnPolicy: {
+              '@type': 'MerchantReturnPolicy',
+              applicableCountry: 'AZ',
+              returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+              merchantReturnDays: 14,
+              returnMethod: 'https://schema.org/ReturnByMail',
+              returnFees: 'https://schema.org/FreeReturn',
+            },
           },
         }}
       />

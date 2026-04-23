@@ -128,6 +128,21 @@ def tr_group(text):
     return GROUP_TR.get(text.strip(), text.strip())
 
 
+_UNIT_REPLACEMENTS = [
+    ("л/100км","l/100km"),("л/100 км","l/100km"),("км/ч","km/saat"),
+    ("об/мин","d/d"),("л.с.","a.g."),("см³","sm³"),("мм","mm"),
+    ("кг","kq"),("Нм","Nm"),("кВт","kVt"),("г/км","q/km"),
+    ("АИ-","AI-"),("Евро ","Avro "),(" при "," @ "),(" л"," l"),
+]
+
+
+def tr_val(text):
+    t = tr(text)
+    for ru, az in _UNIT_REPLACEMENTS:
+        t = t.replace(ru, az)
+    return t
+
+
 def make_specs(raw):
     """Convert raw specs dict → translated JSON array."""
     result = []
@@ -136,7 +151,7 @@ def make_specs(raw):
         sort += 1
         translated = []
         for key, val in items:
-            translated.append({"key": tr(key), "value": tr(val)})
+            translated.append({"key": tr(key), "value": tr_val(val)})
         result.append({
             "label": tr_group(group_name),
             "sort_order": sort,

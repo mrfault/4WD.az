@@ -57,12 +57,61 @@ async function fetchAllBlogPosts(): Promise<
   }
 }
 
+async function fetchAllVehicleBrands(): Promise<
+  Array<{ slug: string; name: string }>
+> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/vehicles/brands`, {
+      headers: { 'Accept-Language': 'az' },
+      cache: 'no-store',
+    });
+    if (!res.ok) return [];
+    const json = await res.json();
+    return json.data ?? [];
+  } catch {
+    return [];
+  }
+}
+
+async function fetchBrandGenerations(brandSlug: string): Promise<
+  Array<{ slug: string; updated_at?: string }>
+> {
+  try {
+    const res = await fetch(
+      `${API_BASE_URL}/vehicles/brands/${brandSlug}/models-with-generations`,
+      { headers: { 'Accept-Language': 'az' }, cache: 'no-store' }
+    );
+    if (!res.ok) return [];
+    const json = await res.json();
+    const generations: Array<{ slug: string; updated_at?: string }> = [];
+    for (const model of json.data ?? []) {
+      for (const gen of model.generations ?? []) {
+        if (gen.slug) {
+          generations.push({ slug: gen.slug, updated_at: gen.updated_at });
+        }
+      }
+    }
+    return generations;
+  } catch {
+    return [];
+  }
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [products, categories, blogPosts] = await Promise.all([
+  const [products, categories, blogPosts, vehicleBrands] = await Promise.all([
     fetchAllProducts(),
     fetchAllCategories(),
     fetchAllBlogPosts(),
+    fetchAllVehicleBrands(),
   ]);
+
+  // Fetch all generations for each brand in parallel
+  const brandGenerationsMap = await Promise.all(
+    vehicleBrands.map(async (brand) => ({
+      brand,
+      generations: await fetchBrandGenerations(brand.slug),
+    }))
+  );
 
   const staticPages: MetadataRoute.Sitemap = [
     {
@@ -149,5 +198,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...productPages, ...categoryPages, ...blogPages];
+  // 4x4 Catalog pages
+  const catalogPages: MetadataRoute.Sitemap = [];
+
+  // Main catalog page
+  catalogPages.push({
+    url: `${SITE_URL}/4x4-catalog`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  });
+
+  // Brand pages + generation pages
+  for (const { brand, generations } of brandGenerationsMap) {
+    catalogPages.push({
+      url: `${SITE_URL}/4x4-catalog/${brand.slug}`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    });
+
+    for (const gen of generations) {
+      catalogPages.push({
+        url: `${SITE_URL}/4x4-catalog/${brand.slug}/${gen.slug}`,
+        lastModified: gen.updated_at ? new Date(gen.updated_at) : new Date(),
+        changeFrequency: 'monthly',
+        priority: 0.6,
+      });
+    }
+  }
+
+  return [...staticPages, ...productPages, ...categoryPages, ...blogPages, ...catalogPages];
 }
