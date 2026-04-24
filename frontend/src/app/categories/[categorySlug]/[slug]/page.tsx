@@ -162,6 +162,11 @@ export default async function ProductDetailPage({ params }: ProductPageProps) {
                 '@type': 'DefinedRegion',
                 addressCountry: 'AZ',
               },
+              shippingRate: {
+                '@type': 'MonetaryAmount',
+                value: '0',
+                currency: 'AZN',
+              },
               deliveryTime: {
                 '@type': 'ShippingDeliveryTime',
                 handlingTime: { '@type': 'QuantitativeValue', minValue: 1, maxValue: 3, unitCode: 'DAY' },
