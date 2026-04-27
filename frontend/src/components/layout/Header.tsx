@@ -97,7 +97,7 @@ export default function Header({ locale, categories = [], settings }: HeaderProp
                           {t.nav.allProducts}
                         </Link>
                         <div className="my-1 border-t border-gray-100" />
-                        {categories.map((cat) => (
+                        {categories.filter((cat) => !cat.parent_id).map((cat) => (
                           <Link
                             key={cat.id}
                             href={`/categories/${cat.slug}`}

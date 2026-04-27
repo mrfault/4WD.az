@@ -95,7 +95,7 @@ export default function MobileMenu({
                           <p className="px-3 text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">
                             {t.nav.categories}
                           </p>
-                          {categories.map((cat) => (
+                          {categories.filter((cat) => !cat.parent_id).map((cat) => (
                             <Link
                               key={cat.id}
                               href={`/categories/${cat.slug}`}
