@@ -6,8 +6,16 @@ import { getVehicleBrands } from '@/lib/api';
 import { getImageUrl } from '@/lib/utils';
 
 export const metadata: Metadata = {
-  title: '4x4 Kataloq | 4WD.az',
+  title: '4x4 Kataloq',
   description: 'Offroad avtomobillərinin texniki xüsusiyyətləri - Toyota, Nissan, Jeep, Land Rover və digər 4x4 brendlər.',
+  alternates: { canonical: 'https://4wd.az/4x4-catalog' },
+  openGraph: {
+    title: '4x4 Kataloq | 4WD.az',
+    description: 'Offroad avtomobillərinin texniki xüsusiyyətləri - Toyota, Nissan, Jeep, Land Rover və digər 4x4 brendlər.',
+    url: 'https://4wd.az/4x4-catalog',
+    type: 'website',
+    siteName: '4WD.az',
+  },
 };
 
 export default async function CatalogPage() {

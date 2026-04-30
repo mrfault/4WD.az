@@ -14,12 +14,21 @@ interface Props {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { genSlug } = await params;
+  const { brandSlug, genSlug } = await params;
   try {
     const gen = await getCatalogGenerationDetail(genSlug, 'az');
+    const canonicalUrl = `https://4wd.az/4x4-catalog/${brandSlug}/${genSlug}`;
     return {
-      title: `${gen.brand.name} ${gen.model.name} ${gen.name} — Texniki Xüsusiyyətlər | 4WD.az`,
+      title: `${gen.brand.name} ${gen.model.name} ${gen.name} — Texniki Xüsusiyyətlər`,
       description: `${gen.brand.name} ${gen.model.name} ${gen.name} (${gen.year_from}${gen.year_to ? '-' + gen.year_to : '+'}) texniki göstəriciləri.`,
+      alternates: { canonical: canonicalUrl },
+      openGraph: {
+        title: `${gen.brand.name} ${gen.model.name} ${gen.name} — Texniki Xüsusiyyətlər | 4WD.az`,
+        description: `${gen.brand.name} ${gen.model.name} ${gen.name} (${gen.year_from}${gen.year_to ? '-' + gen.year_to : '+'}) texniki göstəriciləri.`,
+        url: canonicalUrl,
+        type: 'website',
+        siteName: '4WD.az',
+      },
     };
   } catch {
     return { title: '4x4 Kataloq | 4WD.az' };

@@ -14,9 +14,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { brandSlug } = await params;
   try {
     const { brand } = await getCatalogBrandModels(brandSlug, 'az');
+    const canonicalUrl = `https://4wd.az/4x4-catalog/${brandSlug}`;
     return {
-      title: `${brand.name} 4x4 Modellər | 4WD.az`,
+      title: `${brand.name} 4x4 Modellər`,
       description: `${brand.name} offroad avtomobillərinin bütün modelləri və nəsilləri.`,
+      alternates: { canonical: canonicalUrl },
+      openGraph: {
+        title: `${brand.name} 4x4 Modellər | 4WD.az`,
+        description: `${brand.name} offroad avtomobillərinin bütün modelləri və nəsilləri.`,
+        url: canonicalUrl,
+        type: 'website',
+        siteName: '4WD.az',
+      },
     };
   } catch {
     return { title: '4x4 Kataloq | 4WD.az' };
