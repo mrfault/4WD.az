@@ -49,8 +49,39 @@ export default async function BrandModelsPage({ params }: Props) {
 
   if (!brand) notFound();
 
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Ana Səhifə', item: 'https://4wd.az' },
+      { '@type': 'ListItem', position: 2, name: '4x4 Kataloq', item: 'https://4wd.az/4x4-catalog' },
+      { '@type': 'ListItem', position: 3, name: brand.name },
+    ],
+  };
+
+  const itemListLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${brand.name} 4x4 Modellər`,
+    description: `${brand.name} offroad avtomobillərinin bütün modelləri və nəsilləri.`,
+    url: `https://4wd.az/4x4-catalog/${brandSlug}`,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: models.flatMap((model) =>
+        model.generations.map((gen, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          url: `https://4wd.az/4x4-catalog/${brandSlug}/${gen.slug}`,
+          name: `${brand.name} ${model.name} ${gen.name}`,
+        }))
+      ),
+    },
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListLd) }} />
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
         <Link href="/" className="hover:text-orange-500 transition-colors">{t.nav.home}</Link>

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { getTranslation } from '@/lib/getTranslation';
 import { getCatalogGenerationDetail } from '@/lib/api';
 import { getImageUrl } from '@/lib/utils';
@@ -43,15 +43,40 @@ export default async function GenerationDetailPage({ params }: Props) {
   try {
     gen = await getCatalogGenerationDetail(genSlug, 'az');
   } catch {
-    notFound();
+    permanentRedirect(`/4x4-catalog/${brandSlug}`);
   }
-  if (!gen) notFound();
+  if (!gen) permanentRedirect(`/4x4-catalog/${brandSlug}`);
 
   const heroUrl = getImageUrl(gen.image);
   const yearTo = gen.year_to ?? t.catalog.present;
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Car',
+    name: `${gen.brand.name} ${gen.model.name} ${gen.name}`,
+    brand: { '@type': 'Brand', name: gen.brand.name },
+    model: gen.model.name,
+    vehicleModelDate: `${gen.year_from}`,
+    description: `${gen.brand.name} ${gen.model.name} ${gen.name} (${gen.year_from}–${gen.year_to ?? t.catalog.present}) texniki xüsusiyyətləri`,
+    url: `https://4wd.az/4x4-catalog/${brandSlug}/${genSlug}`,
+    ...(heroUrl ? { image: heroUrl } : {}),
+  };
+
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Ana Səhifə', item: 'https://4wd.az' },
+      { '@type': 'ListItem', position: 2, name: '4x4 Kataloq', item: 'https://4wd.az/4x4-catalog' },
+      { '@type': 'ListItem', position: 3, name: gen.brand.name, item: `https://4wd.az/4x4-catalog/${brandSlug}` },
+      { '@type': 'ListItem', position: 4, name: `${gen.model.name} ${gen.name}` },
+    ],
+  };
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
       {/* Breadcrumb */}
       <nav className="flex items-center gap-1.5 text-xs text-gray-400 mb-6 flex-wrap">
         <Link href="/" className="hover:text-orange-500 transition-colors">{t.nav.home}</Link>
